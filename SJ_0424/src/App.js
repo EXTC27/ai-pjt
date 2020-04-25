@@ -5,7 +5,7 @@ import MainPage from './components/MainPage'
 import EditorPage from './components/EditorPage'
 import * as CropRect from './components/Settings/Crop/CropRect'
 import Konva from 'konva'
-import {Layer, Image, Rect} from "react-konva";
+import {Image, Rect} from "react-konva";
 import { Crop } from '@material-ui/icons';
 
 class App extends Component{
@@ -25,21 +25,16 @@ class App extends Component{
       imgOrg: null,
       imgList: [], 
       imgHistory: [],
-      historyIdx: 0,
       imgUpload: this.imgUpload,
       imgInit: this.imgInit,
 
       layerRef: React.createRef(),
 
       stageRef: React.createRef(),
-      stageHistory: [
-        {
-          width: 0,
-          height: 0,
-          scale: 0,
-          ratio: 0,
-        }
-      ],
+      stageWidth: 0,
+      stageHeight: 0,
+      stageScale: 0,
+      ratio: 0,
       stageInit: this.stageInit,
 
       confirm: this.confirm,
@@ -84,20 +79,16 @@ class App extends Component{
       })
       .then(()=>{
         const _cont = document.querySelector('#canvas-container')
-        console.log(_cont.offsetHeight)
+
         if(this.state.imgWidth > this.state.imgHeight){
           const _contW = _cont.offsetWidth
           const _scale = _contW / this.state.imgWidth
           const _ratio = this.state.imgWidth / _contW
           this.setState({
-            stageHistory: [
-              {
-                width: _contW,
-                height: _scale * this.state.imgHeight,
-                scale: _scale,
-                ratio: _ratio,
-              }
-            ]
+            stageWidth: _contW,
+            stageHeight: _scale * this.state.imgHeight,
+            stageScale: _scale,
+            ratio: _ratio,
           })
         }
         else{
@@ -105,14 +96,10 @@ class App extends Component{
           const _scale = _contH / this.state.imgHeight
           const _ratio = this.state.imgHeight / _contH
           this.setState({
-            stageHistory: [
-              {
-                width: _scale * this.state.imgWidth,
-                height: _contH,
-                scale: _scale,
-                ratio: _ratio,
-              }
-            ]
+            stageWidth: _scale * this.state.imgWidth,
+            stageHeight: _contH,
+            stageScale: _scale,
+            ratio: _ratio,
           })
         }
       })
@@ -122,46 +109,10 @@ class App extends Component{
     }
   }
 
-  stageUdate = (rectWidth, rectHeight) => {
-    const _cont = document.querySelector('#canvas-container')
-    console.log(_cont.offsetHeight)
-    if(rectWidth > rectHeight){
-      const _contW = _cont.offsetWidth
-      const _scale = _contW /rectWidth
-      const _ratio = rectWidth / _contW
-      this.setState({
-        stageHistory: this.state.stageHistory.concat(
-          {
-            width: _contW,
-            height: _scale * rectHeight,
-            scale: _scale,
-            ratio: _ratio,
-          }
-        )
-      })
-    }
-    else{
-      const _contH = _cont.offsetHeight
-      const _scale = _contH / rectHeight
-      const _ratio = rectHeight / _contH
-      this.setState({
-        stageHistory: this.state.stageHistory.concat(
-          {
-            width: _scale * rectWidth,
-            height: _contH,
-            scale: _scale,
-            ratio: _ratio,
-          }
-        )
-      })
-    }
-  }
-
   imgInit = (_img) => {
     this.setState({
-      imgHistory: [
-        <Image key={0} image={_img}/>
-      ]
+      imgOrg: <Image key={0} id="origin-img" image={_img}/>,
+      imgList: [<Image key={0} id="origin-img" image={_img}/>]
     })
   }
 
@@ -175,10 +126,9 @@ class App extends Component{
       imgOrg: null,
       imgList: [], 
       imgHistory: [],
-      historyIdx: 0,
       stageWidth: 0,
       stageHeight: 0,
-      scale: 0,
+      stageScale: 0,
       ratio: 0,
       curMode: '',
     })    
@@ -190,11 +140,12 @@ class App extends Component{
 
     if(this.state.curMode === 'origin'){
       if(_confirm === 'yes'){
+        
         this.setState({
           curMode: '',
-          imgHistory: [this.state.imgHistory[0]],
-          historyIdx: 0,
+          imgList: [this.state.imgOrg],
         })
+
       }
       else{
         this.setState({
@@ -224,18 +175,18 @@ class App extends Component{
       })
       .then(() => {
         if(_curMode === 'crop'){
-          const _width = this.state.imgWidth
-          const _height = this.state.imgHeight
-          // const _scale = this.state.scale
+          const _width = this.state.imgWidth * this.state.stageScale
+          const _height = this.state.imgHeight * this.state.stageScale
           const _initVal = {
-            x: (_width) / 4,
-            y: (_height) / 4,
-            width: _width / 2,
-            height: _height / 2,
-            // scale: this.state.scale,
+            x: (this.state.imgWidth - _width) / 2,
+            y: (this.state.imgHeight - _height) / 2,
+            width: _width,
+            height: _height,
+            scale: this.state.stageScale,
           }
           CropRect.createCropRect(this.state.stageRef, _initVal)
         }
+        
       })
       
     }
@@ -248,50 +199,32 @@ class App extends Component{
 
   applyChange = () => {
     if(this.state.curMode === 'crop'){
-      const stage = this.state.stageRef.getStage()
-      const cropRect = stage.find('#crop-rect')[0].attrs
-      const cropInfo = {
-        x: cropRect.x,
-        y: cropRect.y,
-        width: cropRect.width * cropRect.scaleX,
-        height: cropRect.height * cropRect.scaleY,
-      }
       
-      // console.log(cropRect)
-      console.log(cropInfo)
+      const stage = this.state.stageRef.getStage()
+      const layer = this.state.layerRef.getLayer()
+      const croprect = stage.find('#crop-rect')[0].attrs
+      console.log(croprect)
+      const croped = {
+        x: croprect.x,
+        y: croprect.y,
+        width: croprect.width * croprect.scaleX,
+        height: croprect.height * croprect.scaleY,
+      }
+      console.log(croped)
 
-      this.stageUdate(cropInfo.width, cropInfo.height)
-      this.setStateAsync({
-      })
-      .then(
-        this.setState({
-          imgHistory: this.state.imgHistory.concat(
-            <Image 
-              key={this.state.historyIdx + 1} 
-              image={this.state.img} 
-              crop={cropInfo}
-            />
-          )
-        })
-      )
-      .then(
-        this.setState({
-          historyIdx: this.state.historyIdx + 1
-        })
-      )
+      const img = stage.find('#origin-img')[0]
+      console.log(img)
 
+
+
+      layer.add(img.crop(croped))
+      layer.draw()
+      
     }
-    this.setState({
-      curMode:''
-    })
-
-
   }
   cancelChange = () => {
     if(this.state.curMode === 'crop'){
-      this.setState({
-
-      })
+      
     }
 
     this.setState({

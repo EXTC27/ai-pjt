@@ -10,10 +10,15 @@ class TopMenu extends Component {
     document.getElementById('save').addEventListener(
       'click',
       () => {
-        // var stage = document.getElementsByTagName('canvas')[0]
+        // var stage = document.getElementsByTagName('canvas')
         // var dataURL = stage.toDataURL("image/png");
-        var stage = this.props.stageRef.getStage()
-        var dataURL = stage.toDataURL({ pixelRatio: Math.round(this.props.ratio) });
+        const store = this.props.store
+        const _stage = store.stageRef.getStage()
+        const _ratio = store.stageHistory[store.historyIdx].ratio
+        // if(_ratio < 1){
+        //   _ratio = 1
+        // }
+        const dataURL = _stage.toDataURL({ pixelRatio: Math.round(_ratio) });
         this.downloadURI(dataURL, 'stage.png');
       },
       false
@@ -37,8 +42,8 @@ class TopMenu extends Component {
 
             <IconButton id="backToMain" onClick={store.changeMode}><KeyboardBackspace/></IconButton>
             <div className="mid">
-              <IconButton><Undo/></IconButton>
-              <IconButton><Redo/></IconButton>  
+              <IconButton id="undo" onClick={store.changeHistory}><Undo/></IconButton>
+              <IconButton id="redo" onClick={store.changeHistory}><Redo/></IconButton>  
             </div>
             <IconButton id="save" disabled={store.curMode !== ''}><SaveAlt/></IconButton>
             

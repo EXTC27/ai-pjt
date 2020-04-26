@@ -30,6 +30,7 @@ class DrawerMenu extends Component{
 } export default DrawerMenu;
 
 const StDrawerMenuCont = styled.div`
+  font-family: 'Single Day', cursive;
   display: flex;
   flex-direction: column;
   align-items: center;

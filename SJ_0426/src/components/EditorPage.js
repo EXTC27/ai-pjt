@@ -49,6 +49,7 @@ class EditorPage extends Component {
 } export default EditorPage;
 
 const StEditorCont = styled.div`
+  font-family: 'Single Day', cursive;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

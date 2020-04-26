@@ -8,7 +8,6 @@ import axios from 'axios'
 import {Image, Rect} from "react-konva";
 
 class App extends Component{
-
   constructor(props){
     super(props)
     

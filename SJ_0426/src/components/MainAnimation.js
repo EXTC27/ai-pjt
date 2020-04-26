@@ -26,7 +26,7 @@ export default MainAnimation;
 const Animation = styled.div`
   width: 70%;
   height: 30%;
-  margin-bottom: 30%;
+  margin-bottom: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,7 +62,7 @@ const Animation = styled.div`
   .logo{
     display: flex;
     margin: 0.5rem;
-    background-color: white;
+    background: linear-gradient(to bottom, #66ffff 0%, #ff99cc 100%);
     border: 3px solid white;
     border-radius: 29px;
     img{
@@ -71,7 +71,10 @@ const Animation = styled.div`
   }
 
   .words{
-    font-family: 'Nanum Pen Script', cursive;
+    font-family: 'Baloo Bhaina 2', cursive;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 0 10px gray;
     text-align:center;
     display: flex;
     width: 80%;

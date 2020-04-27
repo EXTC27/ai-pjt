@@ -1,55 +1,64 @@
 import React, { Component } from 'react';
-import SegmentList from '../Settings/Segment/SegmentList'
-import {Storage} from '../Storage';
+import SegmentList from '../Settings/Segment/SegmentList';
+import { Storage } from '../Storage';
 import styled from 'styled-components';
-import {IconButton, Slider, Input} from '@material-ui/core'
-import {Clear, Check, Refresh} from '@material-ui/icons';
+import { IconButton, Slider } from '@material-ui/core';
+import { Clear, Check, Refresh } from '@material-ui/icons';
+import Adjust from '../Settings/Adjust/Adjust';
 
-
-class DrawerMenu extends Component{
-  render(){
-    return(
+class DrawerMenu extends Component {
+  render() {
+    return (
       <Storage.Consumer>
-      {
-        store => (
+        {(store) => (
           <StDrawerMenuCont>
             <StMenuCont>
-              {
-                store.curMode === 'segment' ? 
+              {store.curMode === 'segment' ? (
                 <>
-                  <IconButton id={store.curMode} onClick={store.applyChange}><Refresh fontSize="large" /></IconButton>
-                  <IconButton id={store.curMode} onClick={store.cancelChange}><Check fontSize="large"/></IconButton>
+                  <IconButton id={store.curMode} onClick={store.applyChange}>
+                    <Refresh fontSize="large" />
+                  </IconButton>
+                  <IconButton id={store.curMode} onClick={store.cancelChange}>
+                    <Check fontSize="large" />
+                  </IconButton>
                 </>
-                :
+              ) : (
                 <>
-                  <IconButton id={store.curMode} onClick={store.applyChange}><Check fontSize="large" /></IconButton>
-                  <IconButton id={store.curMode} onClick={store.cancelChange}><Clear fontSize="large"/></IconButton>
+                  <IconButton id={store.curMode} onClick={store.applyChange}>
+                    <Check fontSize="large" />
+                  </IconButton>
+                  <IconButton id={store.curMode} onClick={store.cancelChange}>
+                    <Clear fontSize="large" />
+                  </IconButton>
                 </>
-              }
+              )}
               {/* <IconButton id={store.curMode} onClick={store.applyChange}><Check fontSize="large" /></IconButton>
               <IconButton id={store.curMode} onClick={store.cancelChange}><Clear fontSize="large"/></IconButton> */}
             </StMenuCont>
 
             <StSettingCont>
-              { store.curMode === 'segment' ? <SegmentList store={store}/> : null }
-              { store.curMode === 'adjust' ?
-              <div style={{'width':'70%'}} >
-                <Slider 
-                  min={0}
-                  step={2}
-                  max={40}
-                  onChange={store.changeFilter}
-                />
-              </div>
-              :null}
+              {store.curMode === 'segment' ? (
+                <SegmentList store={store} />
+              ) : null}
+              {store.curMode === 'adjust' ? <Adjust store={store} /> : null}
+              {store.curMode === 'filter' ? (
+                <div style={{ width: '70%' }}>
+                  <Slider
+                    min={0}
+                    step={2}
+                    max={40}
+                    onChange={store.changeFilter}
+                  />
+                </div>
+              ) : null}
             </StSettingCont>
           </StDrawerMenuCont>
-        )
-      }
+        )}
       </Storage.Consumer>
-    )
+    );
   }
-} export default DrawerMenu;
+}
+export default DrawerMenu;
 
 const StDrawerMenuCont = styled.div`
   font-family: 'Single Day', cursive;
@@ -70,14 +79,13 @@ const StDrawerMenuCont = styled.div`
 const StMenuCont = styled.div`
   display: flex;
   align-self: flex-end;
-  
-  .MuiTouchRipple-root{
-    color: white;
-  }
-  svg{
-    color: white;
-  }
 
+  .MuiTouchRipple-root {
+    color: white;
+  }
+  svg {
+    color: white;
+  }
 `;
 
 const StSettingCont = styled.div`

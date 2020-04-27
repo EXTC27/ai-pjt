@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { AdjustConsumer } from '../../contexts/AdjustContext';
-
 class Adjust extends Component {
   constructor(props) {
     super(props);
@@ -10,11 +8,18 @@ class Adjust extends Component {
       value: 0,
     };
   }
+
+  componentDidUpdate() {
+    console.log('Adjust.js에서 찍는 hue:' + this.props.store.hue);
+    console.log('Adjust.js에서 찍는 saturation:' + this.props.store.saturation);
+    console.log('Adjust.js에서 찍는 value:' + this.props.store.value);
+  }
+
   componentDidMount() {
     this.setState({
-      hue: this.props.hue,
-      saturaion: this.props.saturation,
-      value: this.props.value,
+      hue: this.props.store.hue,
+      saturation: this.props.store.saturation,
+      value: this.props.store.value,
     });
   }
 
@@ -22,19 +27,19 @@ class Adjust extends Component {
     this.setState({
       hue: m,
     });
-    this.props.onChangeHue(m);
+    this.props.store.onChangeHue(m);
   };
   onChangeSaturation = (m) => {
     this.setState({
       saturation: m,
     });
-    this.props.onChangeSaturation(m);
+    this.props.store.onChangeSaturation(m);
   };
   onChangeValue = (m) => {
     this.setState({
       value: m,
     });
-    this.props.onChangeValue(m);
+    this.props.store.onChangeValue(m);
   };
 
   render() {
@@ -77,19 +82,4 @@ class Adjust extends Component {
   }
 }
 
-const AdjustContainer = () => (
-  <AdjustConsumer>
-    {({ state, actions }) => (
-      <Adjust
-        hue={state.hue}
-        saturaion={state.saturaion}
-        value={state.value}
-        onChangeHue={actions.onChangeHue}
-        onChangeSaturation={actions.onChangeSaturation}
-        onChangeValue={actions.onChangeValue}
-      />
-    )}
-  </AdjustConsumer>
-);
-
-export default AdjustContainer;
+export default Adjust;

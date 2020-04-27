@@ -101,8 +101,9 @@ class App extends Component {
   changeAdjust = () => {
     const stage = this.state.stageRef.getStage();
     const adjustLayer = stage.find('#edit-layer');
-    const adjustimg = adjustLayer.find('#adjust-img')[0];
+    const adjustimg = stage.find('#adjust-img')[0];
     adjustimg.cache();
+
     console.log(
       '덮어 씌울 hue,saturation,value:' +
         this.state.hue +
@@ -111,10 +112,11 @@ class App extends Component {
         ',' +
         this.state.value
     );
-    adjustimg.hue = this.state.hue;
-    adjustimg.saturation = this.state.saturation;
-    adjustimg.value = this.state.value;
-    adjustLayer.batchDraw(adjustimg);
+    adjustimg.filters([Konva.Filters.HSV]);
+    adjustimg[`hue`](this.state.hue);
+    adjustimg[`saturation`](this.state.saturation);
+    adjustimg[`value`](this.state.value);
+    adjustLayer.batchDraw();
     //console.log(adjustimg);
   };
 

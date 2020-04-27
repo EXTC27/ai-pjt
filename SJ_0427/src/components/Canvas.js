@@ -44,7 +44,6 @@ class Canvas extends Component {
               <Layer id="edit-layer">
                 {store.curMode === 'adjust' ? (
                   <Image
-                    // id="adjust-img"
                     image={store.img}
                     filters={[Konva.Filters.HSV]}
                     hue={store.hue}
@@ -54,14 +53,45 @@ class Canvas extends Component {
                       store.adjustRef = ref;
                     }}
                   />
-                ) : store.curMode === 'filter' ? (
+                ) : null}
+                {store.filterType === 'blur' ? (
                   <Image
-                    // id="filter-img"
                     image={store.img}
                     filters={[Konva.Filters.Blur]}
-                    blurRadius={store.filterVal}
+                    blurRadius={store.blurVal}
                     ref={(ref) => {
-                      store.filterRef = ref;
+                      store.blurRef = ref;
+                    }}
+                  />
+                ) : null}
+                {store.filterType === 'brighten' ? (
+                  <Image
+                    image={store.img}
+                    filters={[Konva.Filters.Brighten]}
+                    brightness={store.brightenVal}
+                    ref={(ref) => {
+                      store.brightenRef = ref;
+                    }}
+                  />
+                ) : null}
+
+                {store.filterType === 'contrast' ? (
+                  <Image
+                    image={store.img}
+                    filters={[Konva.Filters.Contrast]}
+                    contrast={store.contrastVal}
+                    ref={(ref) => {
+                      store.contrastRef = ref;
+                    }}
+                  />
+                ) : null}
+
+                {store.filterType === 'grayscale' ? (
+                  <Image
+                    image={store.img}
+                    filters={[Konva.Filters.Grayscale]}
+                    ref={(ref) => {
+                      store.grayscaleRef = ref;
                     }}
                   />
                 ) : null}

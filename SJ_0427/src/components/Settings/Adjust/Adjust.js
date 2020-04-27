@@ -9,11 +9,11 @@ class Adjust extends Component {
     };
   }
 
-  componentDidUpdate() {
-    console.log('Adjust.js에서 찍는 hue:' + this.props.store.hue);
-    console.log('Adjust.js에서 찍는 saturation:' + this.props.store.saturation);
-    console.log('Adjust.js에서 찍는 value:' + this.props.store.value);
-  }
+  // componentDidUpdate() {
+  //   console.log('Adjust.js에서 찍는 hue:' + this.props.store.hue);
+  //   console.log('Adjust.js에서 찍는 saturation:' + this.props.store.saturation);
+  //   console.log('Adjust.js에서 찍는 value:' + this.props.store.value);
+  // }
 
   componentDidMount() {
     this.setState({

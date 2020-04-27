@@ -1,64 +1,102 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import {Storage} from '../Storage';
-import {IconButton, } from '@material-ui/core';
-import {Photo, Crop, Cached, FlipToFront, Tune, NaturePeople, Face, LocalOffer} from '@material-ui/icons';
+import { Storage } from '../Storage';
+import { IconButton } from '@material-ui/core';
+import {
+  Photo,
+  Crop,
+  Cached,
+  FlipToFront,
+  Tune,
+  NaturePeople,
+  Face,
+  LocalOffer,
+} from '@material-ui/icons';
 
 class BottomMenu extends Component {
-
-  render(){
-    return(
+  render() {
+    return (
       <Storage.Consumer>
-      {
-        store => (
+        {(store) => (
           <StBottomMenuCont>
-            <StButtonCont id="origin" mode={store.curMode} onClick={store.changeMode}>
-              <Photo fontSize='large'/>
+            <StButtonCont
+              id="origin"
+              mode={store.curMode}
+              onClick={store.changeMode}
+            >
+              <Photo fontSize="large" />
               <label>원본</label>
             </StButtonCont>
 
-            <StButtonCont id="crop" mode={store.curMode} onClick={store.changeMode}>
-              <Crop fontSize='large'/>
+            <StButtonCont
+              id="crop"
+              mode={store.curMode}
+              onClick={store.changeMode}
+            >
+              <Crop fontSize="large" />
               <label>자르기</label>
             </StButtonCont>
 
-            <StButtonCont id="rotate" mode={store.curMode} onClick={store.changeMode}>
-              <Cached fontSize='large'/>
+            <StButtonCont
+              id="rotate"
+              mode={store.curMode}
+              onClick={store.changeMode}
+            >
+              <Cached fontSize="large" />
               <label>회전</label>
             </StButtonCont>
 
-            <StButtonCont id="filter" mode={store.curMode} onClick={store.changeMode}>
-              <FlipToFront fontSize='large'/>
+            <StButtonCont
+              id="filter"
+              mode={store.curMode}
+              onClick={store.changeMode}
+            >
+              <FlipToFront fontSize="large" />
               <label>필터</label>
             </StButtonCont>
 
-            <StButtonCont id="adjust" mode={store.curMode} onClick={store.changeMode}>
-              <Tune fontSize='large'/>
+            <StButtonCont
+              id="adjust"
+              mode={store.curMode}
+              onClick={store.changeMode}
+            >
+              <Tune fontSize="large" />
               <label>조정</label>
             </StButtonCont>
 
-            <StButtonCont id="segment" mode={store.curMode} onClick={store.changeMode}>
-              <NaturePeople fontSize='large'/>
+            <StButtonCont
+              id="segment"
+              mode={store.curMode}
+              onClick={store.changeMode}
+            >
+              <NaturePeople fontSize="large" />
               <label>객체찾기</label>
             </StButtonCont>
 
-            <StButtonCont id="face" mode={store.curMode} onClick={store.changeMode}>
-              <Face fontSize='large'/>
+            <StButtonCont
+              id="face"
+              mode={store.curMode}
+              onClick={store.changeMode}
+            >
+              <Face fontSize="large" />
               <label>얼굴인식</label>
             </StButtonCont>
 
-            <StButtonCont id="tag" mode={store.curMode} onClick={store.changeMode}>
-              <LocalOffer fontSize='large'/>
+            <StButtonCont
+              id="tag"
+              mode={store.curMode}
+              onClick={store.changeMode}
+            >
+              <LocalOffer fontSize="large" />
               <label>태그생성</label>
             </StButtonCont>
           </StBottomMenuCont>
-        )
-      }
+        )}
       </Storage.Consumer>
-    )
+    );
   }
-
-} export default BottomMenu;
+}
+export default BottomMenu;
 
 const StBottomMenuCont = styled.div`
   display: flex;
@@ -66,7 +104,7 @@ const StBottomMenuCont = styled.div`
   justify-content: flex-start;
   /* background: linear-gradient(to top left, #66ffff 0%, #ff9999 100%); */
   background: linear-gradient(to top left, #66ccff 0%, #ff99cc 100%);
-  box-sizing: border-box;  
+  box-sizing: border-box;
   border-radius: 8px 8px 0 0;
   width: 100%;
   z-index: 1;
@@ -79,14 +117,14 @@ const StButtonCont = styled(IconButton)`
   /* color: #e6e6e6; */
   color: white;
   text-shadow: 0 0 10px black;
-  .MuiIconButton-label{
+  .MuiIconButton-label {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  label{
+  label {
     font-family: 'Single Day', cursive;
     padding-top: 2px;
     font-size: 60%;
   }
-`
+`;

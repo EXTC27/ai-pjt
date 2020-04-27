@@ -7,6 +7,9 @@ import * as CropRect from './components/Settings/Crop/CropRect';
 import axios from 'axios';
 import { Image, Rect } from 'react-konva';
 import Konva from 'konva';
+import styled from 'styled-components';
+import { IconButton } from '@material-ui/core';
+import FilterTypeMenu from './components/Menus/FilterTypeMenu';
 
 class App extends Component {
   constructor(props) {
@@ -56,13 +59,23 @@ class App extends Component {
       historyIdx: 0,
       changeHistory: this.changeHistory,
 
-      filterVal: 0,
-      filter: null,
-      filterRef: React.createRef(),
-      changeFilter: this.changeFilter,
+      fiterType: '',
+      changefilterType: this.changefilterType,
+
+      blurVal: 0,
+      blurRef: React.createRef(),
+      changeBlur: this.changeBlur,
       touchFlag: false,
       touchStart: this.touchStart,
       touchEnd: this.touchEnd,
+
+      brightenVal: 0,
+      brightenRef: React.createRef(),
+      changeBrighten: this.changeBrighten,
+
+      contrastVal: 0,
+      contrastRef: React.createRef(),
+      changeContrast: this.changeContrast,
 
       hue: 150,
       saturation: 0,
@@ -72,8 +85,63 @@ class App extends Component {
       onChangeHue: this.onChangeHue,
       onChangeSaturation: this.onChangeSaturation,
       onChangeValue: this.onChangeValue,
+
+      embossRef: React.createRef(),
+      embossOption: 'top',
+      embossBlend: true,
+      embossStrength: 0.5,
+      embossWhiteLevel: 0.5,
+      onChangeOption: this.onChangeOption,
+      onChangeBlend: this.onChangeBlend,
+      onChangeStrength: this.onChangeStrength,
+      onChangeWhiteLevel: this.onChangeWhiteLevel,
+      onChangeEmboss: this.onChangeEmboss,
+
+      enhanceVal: 0,
+      enhanceRef: React.createRef(),
+      changeEnhance: this.changeEnhance,
+
+      grayscaleRef: React.createRef(),
+      changeGrayscale: this.changeGrayscale,
     };
   }
+
+  onChangeOption = async (m) => {
+    await this.setState({
+      embossOption: m,
+    });
+  };
+  onChangeBlend = async (m) => {
+    await this.setState({
+      embossBlend: m,
+    });
+  };
+  onChangeStrength = async (m) => {
+    await this.setState({
+      embossStrength: m,
+    });
+  };
+  onChangeWhiteLevel = async (m) => {
+    await this.setState({
+      embossWhiteLevel: m,
+    });
+  };
+
+  onChangeEmboss = async () => {
+    if (!this.state.touchFlag) {
+      const stage = this.state.stageRef.getStage();
+
+      const embossLayer = stage.find('#edit-layer');
+      const embossimg = stage.find('#emboss-img')[0];
+      embossimg.cache();
+      embossimg['embossStrength'](this.state.embossStrength);
+      embossimg['embossWhiteLevel'](this.state.embossWhiteLevel);
+      embossimg['embossDirection'](this.state.embossDirection);
+      embossimg.filters([Konva.Filters.Emboss]);
+      embossLayer.batchDraw();
+    }
+  };
+
   onChangeHue = async (m) => {
     if (!this.state.touchFlag) {
       this.setState({
@@ -120,20 +188,70 @@ class App extends Component {
     //console.log(adjustimg);
   };
 
-  changeFilter = async (e, value) => {
-    console.log('e.target.value:' + e.target.value); //undefined
+  changeBrighten = async (e, value) => {
     if (!this.state.touchFlag) {
       await this.setStateAsync({
-        filterVal: value,
+        brightenVal: value,
       });
-      console.log('value:' + value); //제대로 나옴
       const stage = this.state.stageRef.getStage();
-      const filterLayer = stage.find('#edit-layer');
-      const filterimg = stage.find('#filter-img')[0];
-      filterimg.cache();
-      filterimg.filters([Konva.Filters.Blur]);
-      filterimg.blurRadius(value);
-      filterLayer.draw();
+
+      const brightenLayer = stage.find('#edit-layer');
+      const brightenimg = stage.find('#brighten-img')[0];
+      brightenimg.cache();
+      brightenimg.filters([Konva.Filters.Brighten]);
+      brightenimg.brightness(value);
+      brightenLayer.batchDraw();
+    }
+  };
+
+  changeEnhance = async (e, value) => {
+    if (!this.state.touchFlag) {
+      await this.setStateAsync({
+        enhanceVal: value,
+      });
+      const stage = this.state.stageRef.getStage();
+      const enhanceLayer = stage.find('#edit-layer');
+      const enhanceimg = stage.find('#enhance-img')[0];
+      enhanceimg.cache();
+      enhanceimg.filters([Konva.Filters.Enhance]);
+      enhanceimg.enhance(value);
+      enhanceLayer.batchDraw();
+    }
+  };
+  changeContrast = async (e, value) => {
+    if (!this.state.touchFlag) {
+      await this.setStateAsync({
+        contrastVal: value,
+      });
+      const stage = this.state.stageRef.getStage();
+      const contrastLayer = stage.find('#edit-layer');
+      const contrastimg = stage.find('#contrast-img')[0];
+      contrastimg.cache();
+      contrastimg.filters([Konva.Filters.Contrast]);
+      contrastimg[`contrast`](value);
+      contrastLayer.batchDraw();
+    }
+  };
+  changeGrayscale = async () => {
+    const stage = this.state.stageRef.getStage();
+    const grayscaleLayer = stage.find('#edit-layer');
+    const grayscaleimg = stage.find('#grayscale-img')[0];
+    grayscaleimg.cache();
+    grayscaleimg.filters([Konva.Filters.Grayscale]);
+    grayscaleLayer.batchDraw();
+  };
+  changeBlur = async (e, value) => {
+    if (!this.state.touchFlag) {
+      await this.setStateAsync({
+        blurVal: value,
+      });
+      const stage = this.state.stageRef.getStage();
+      const blurLayer = stage.find('#edit-layer');
+      const blurimg = stage.find('#blur-img')[0];
+      blurimg.cache();
+      blurimg.filters([Konva.Filters.Blur]);
+      blurimg.blurRadius(value);
+      blurLayer.batchDraw();
     }
   };
 
@@ -283,6 +401,60 @@ class App extends Component {
     }
   };
 
+  changefilterType = async (e) => {
+    const _filterType = e.currentTarget.id;
+    //console.log(_filterType);
+    if (_filterType !== '') {
+      await this.setStateAsync({
+        filterType: _filterType,
+      });
+      const stage = this.state.stageRef.getStage();
+      const filterLayer = stage.find('#edit-layer');
+
+      if (_filterType === 'blur') {
+        const blurimg = new Konva.Image({
+          id: 'blur-img',
+          image: this.state.img,
+          blurRadius: this.state.blurVal,
+        });
+        filterLayer.add(blurimg);
+      } else if (_filterType === 'brighten') {
+        const brightenimg = new Konva.Image({
+          id: 'brighten-img',
+          image: this.state.img,
+          brighteness: this.state.brightenVal,
+        });
+        filterLayer.add(brightenimg);
+      } else if (_filterType === 'contrast') {
+        const contrastimg = new Konva.Image({
+          id: 'contrast-img',
+          image: this.state.img,
+          contrast: this.state.contrastVal,
+        });
+        filterLayer.add(contrastimg);
+      } else if (_filterType === 'emboss') {
+        const embossimg = new Konva.Image({
+          id: 'embossimg-img',
+          image: this.state.img,
+        });
+        filterLayer.add(embossimg);
+      } else if (_filterType === 'enhance') {
+        const enhanceimg = new Konva.Image({
+          id: 'enhance-img',
+          image: this.state.img,
+        });
+        filterLayer.add(enhanceimg);
+      } else if (_filterType === 'grayscale') {
+        const grayscaleimg = new Konva.Image({
+          id: 'grayscale-img',
+          image: this.state.img,
+        });
+        filterLayer.add(grayscaleimg);
+        this.changeGrayscale();
+      }
+    }
+  };
+
   changeMode = async (e) => {
     const _curMode = e.currentTarget.id;
 
@@ -361,54 +533,18 @@ class App extends Component {
           console.log(err);
         }
       } else if (_curMode === 'adjust') {
-        //console.log(this.state.stageRef);
         const stage = this.state.stageRef.getStage();
         const adjustLayer = stage.find('#edit-layer');
-        //const adjustimg = adjustLayer.find('#adjust-img');
-        //console.log('adjustimg:' + adjustimg);
         var img = new Konva.Image({
           id: 'adjust-img',
           image: this.state.img,
           hue: this.state.hue,
           saturation: this.state.saturation,
           value: this.state.value,
-          //filters: [Konva.Filters.HSV],
         });
-        //var img = new Konva.Image({
-        //  id: 'adjust-img',
-        //  image: adjustimg,
-        //  hue: adjustimg.hue,
-        //  saturation: adjustimg.saturation,
-        //  value: adjustimg.value,
-        //  filters: [Konva.Filters.HSV],
-        //});
-        //Problem : Canvas에 보여지질 않음
         adjustLayer.add(img);
-
-        console.log(
-          'App.js에서 찍는 hue,saturation,value:' +
-            this.state.hue +
-            ',' +
-            this.state.saturation +
-            ',' +
-            this.state.value
-        );
-
-        //console.log(adjustLayer);
       } else if (_curMode === 'filter') {
-        console.log('curMode=filter, stageRef=' + this.state.stageRef);
-        const stage = this.state.stageRef.getStage();
-        const filterLayer = stage.find('#edit-layer');
-        const img = new Konva.Image({
-          id: 'filter-img',
-          image: this.state.img,
-          blurRadius: this.state.filterVal,
-        });
-        console.log(img);
-        // img.cache();
-        // img.filters([Konva.Filters.Blur]);
-        filterLayer.add(img);
-        //filterLayer.draw();
+        return <FilterTypeMenu />;
       }
     } else {
       this.setStateAsync({
@@ -418,6 +554,10 @@ class App extends Component {
   };
 
   applyChange = async () => {
+    this.setState({
+      curMode: '',
+    });
+
     const _curHistIdx = this.state.historyIdx;
     if (_curHistIdx < this.state.imgHistory.length - 1) {
       console.log(this.state.stageHistory.slice(0, _curHistIdx + 1));
@@ -462,7 +602,7 @@ class App extends Component {
       }).then(
         this.setState({
           historyIdx: this.state.historyIdx + 1,
-          curMode: '',
+          // curMode: '',
         })
       );
     } else if (this.state.curMode === 'segment') {
@@ -529,4 +669,5 @@ class App extends Component {
     );
   }
 }
+
 export default withRouter(App);

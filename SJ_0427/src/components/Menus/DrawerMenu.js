@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { IconButton, Slider } from '@material-ui/core';
 import { Clear, Check, Refresh } from '@material-ui/icons';
 import Adjust from '../Settings/Adjust/Adjust';
+import FilterTypeMenu from './FilterTypeMenu';
+import Emboss from '../Settings/Emboss/Emboss';
 
 class DrawerMenu extends Component {
   render() {
@@ -41,13 +43,61 @@ class DrawerMenu extends Component {
                 <SegmentList store={store} />
               ) : null}
               {store.curMode === 'adjust' ? <Adjust store={store} /> : null}
-              {store.curMode === 'filter' ? (
+              {store.curMode === 'filter' ? <FilterTypeMenu /> : null}
+              {store.filterType === 'blur' ? (
                 <div style={{ width: '70%' }}>
+                  Blur
                   <Slider
                     min={0}
                     step={2}
                     max={40}
-                    onChange={store.changeFilter}
+                    onChange={store.changeBlur}
+                  />
+                </div>
+              ) : null}
+              {store.filterType === 'brighten' ? (
+                <div style={{ width: '70%' }}>
+                  Brightness
+                  <Slider
+                    min={-1}
+                    step={0.05}
+                    max={1}
+                    onChange={store.changeBrighten}
+                  />
+                </div>
+              ) : null}
+              {store.filterType === 'contrast' ? (
+                <div style={{ width: '70%' }}>
+                  Contrast
+                  <Slider
+                    min={-100}
+                    step={1}
+                    max={100}
+                    onChange={store.changeContrast}
+                  />
+                </div>
+              ) : null}
+              {store.filterType === 'emboss' ? <Emboss store={store} /> : null}
+              {store.filterType === 'contrast' ? (
+                <div style={{ width: '70%' }}>
+                  Contrast
+                  <Slider
+                    min={-100}
+                    step={1}
+                    max={100}
+                    onChange={store.changeContrast}
+                  />
+                </div>
+              ) : null}
+              {store.filterType === 'enhance' ? (
+                <div style={{ width: '70%' }}>
+                  Enhance
+                  <Slider
+                    min={-1}
+                    step={0.01}
+                    max={1}
+                    value={store.enhanceVal}
+                    onChange={store.changeEnhance}
                   />
                 </div>
               ) : null}

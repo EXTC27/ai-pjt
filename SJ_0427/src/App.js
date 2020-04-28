@@ -95,10 +95,6 @@ class App extends Component {
       grayscaleRef: React.createRef(),
       changeGrayscale: this.changeGrayscale,
 
-      maskVal: 0,
-      maskRef: React.createRef(),
-      changeMask: this.changeMask,
-
       pixelateVal: 0,
       pixelateRef: React.createRef(),
       changePixelate: this.changePixelate,
@@ -113,22 +109,6 @@ class App extends Component {
       filterRef: React.createRef(),
     };
   }
-
-  changeMask = async (e, value) => {
-    if (!this.state.touchFlag) {
-      await this.setStateAsync({
-        maskVal: value,
-      });
-      const stage = this.state.stageRef.getStage();
-
-      const maskLayer = stage.find('#edit-layer');
-      const maskimg = stage.find('#mask-img')[0];
-      maskimg.cache();
-      maskimg.filters([Konva.Filters.Mask]);
-      maskimg.threshold(value);
-      maskLayer.batchDraw();
-    }
-  };
 
   changePixelate = async (e, value) => {
     if (!this.state.touchFlag) {

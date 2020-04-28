@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-class Adjust extends Component {
+class HSV extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -8,13 +8,6 @@ class Adjust extends Component {
       value: 0,
     };
   }
-
-  // componentDidUpdate() {
-  //   console.log('Adjust.js에서 찍는 hue:' + this.props.store.hue);
-  //   console.log('Adjust.js에서 찍는 saturation:' + this.props.store.saturation);
-  //   console.log('Adjust.js에서 찍는 value:' + this.props.store.value);
-  // }
-
   componentDidMount() {
     this.setState({
       hue: this.props.store.hue,
@@ -49,19 +42,19 @@ class Adjust extends Component {
           <input
             id="hue"
             type="range"
-            min="0"
-            max="259"
-            step="1"
-            value={this.state.hue || 150}
+            min="-100"
+            max="100"
+            step="0.1"
+            value={this.state.hue || 0}
             onChange={(e) => this.onChangeHue(Number(e.target.value))}
           />
           <br />
           <input
             id="saturation"
             type="range"
-            min="-2"
-            max="10"
-            step="0.1"
+            min="-5"
+            max="5"
+            step="0.01"
             value={this.state.saturation || 0}
             onChange={(e) => this.onChangeSaturation(Number(e.target.value))}
           />
@@ -72,7 +65,7 @@ class Adjust extends Component {
             type="range"
             min="-2"
             max="2"
-            step="0.1"
+            step="0.01"
             value={this.state.value || 0}
             onChange={(e) => this.onChangeValue(Number(e.target.value))}
           />
@@ -82,4 +75,4 @@ class Adjust extends Component {
   }
 }
 
-export default Adjust;
+export default HSV;

@@ -4,9 +4,9 @@ import { Storage } from '../Storage';
 import styled from 'styled-components';
 import { IconButton, Slider } from '@material-ui/core';
 import { Clear, Check, Refresh } from '@material-ui/icons';
-import Adjust from '../Settings/Adjust/Adjust';
+import AdjustTypeMenu from './AdjustTypeMenu';
+import HSV from '../Settings/Adjust/HSV';
 import FilterTypeMenu from './FilterTypeMenu';
-import Emboss from '../Settings/Emboss/Emboss';
 
 class DrawerMenu extends Component {
   render() {
@@ -42,31 +42,47 @@ class DrawerMenu extends Component {
               {store.curMode === 'segment' ? (
                 <SegmentList store={store} />
               ) : null}
-              {store.curMode === 'adjust' ? <Adjust store={store} /> : null}
+              {store.curMode === 'adjust' ? <AdjustTypeMenu /> : null}
               {store.curMode === 'filter' ? <FilterTypeMenu /> : null}
-              {store.filterType === 'blur' ? (
+              {store.AdjustType === 'hsv' ? <HSV store={store} /> : null}
+              {store.AdjustType === 'blur' ? (
                 <div style={{ width: '70%' }}>
                   Blur
                   <Slider
                     min={0}
                     step={2}
                     max={40}
+                    value={store.blurVal}
                     onChange={store.changeBlur}
                   />
                 </div>
               ) : null}
-              {store.filterType === 'brighten' ? (
+              {store.AdjustType === 'brighten' ? (
                 <div style={{ width: '70%' }}>
                   Brightness
                   <Slider
                     min={-1}
                     step={0.05}
                     max={1}
+                    value={store.brightenVal}
                     onChange={store.changeBrighten}
                   />
                 </div>
               ) : null}
-              {store.filterType === 'contrast' ? (
+              {store.AdjustType === 'contrast' ? (
+                <div style={{ width: '70%' }}>
+                  Contrast
+                  <Slider
+                    min={-100}
+                    step={1}
+                    max={100}
+                    value={store.contrastVal}
+                    onChange={store.changeContrast}
+                  />
+                </div>
+              ) : null}
+
+              {store.AdjustType === 'contrast' ? (
                 <div style={{ width: '70%' }}>
                   Contrast
                   <Slider
@@ -77,19 +93,7 @@ class DrawerMenu extends Component {
                   />
                 </div>
               ) : null}
-              {store.filterType === 'emboss' ? <Emboss store={store} /> : null}
-              {store.filterType === 'contrast' ? (
-                <div style={{ width: '70%' }}>
-                  Contrast
-                  <Slider
-                    min={-100}
-                    step={1}
-                    max={100}
-                    onChange={store.changeContrast}
-                  />
-                </div>
-              ) : null}
-              {store.filterType === 'enhance' ? (
+              {store.AdjustType === 'enhance' ? (
                 <div style={{ width: '70%' }}>
                   Enhance
                   <Slider
@@ -98,6 +102,30 @@ class DrawerMenu extends Component {
                     max={1}
                     value={store.enhanceVal}
                     onChange={store.changeEnhance}
+                  />
+                </div>
+              ) : null}
+              {store.AdjustType === 'pixelate' ? (
+                <div style={{ width: '70%' }}>
+                  Pixelate
+                  <Slider
+                    min={1}
+                    step={1}
+                    max={30}
+                    value={store.pixelateVal}
+                    onChange={store.changePixelate}
+                  />
+                </div>
+              ) : null}
+              {store.AdjustType === 'noise' ? (
+                <div style={{ width: '70%' }}>
+                  Noise
+                  <Slider
+                    min={0}
+                    step={0.1}
+                    max={4}
+                    value={store.noiseVal}
+                    onChange={store.changeNoise}
                   />
                 </div>
               ) : null}

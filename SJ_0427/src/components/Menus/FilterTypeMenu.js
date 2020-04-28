@@ -1,48 +1,56 @@
 import React, { Component } from 'react';
-import BlurOnIcon from '@material-ui/icons/BlurOn';
-import Brightness6Icon from '@material-ui/icons/Brightness6';
-import Brightness3Icon from '@material-ui/icons/Brightness3';
-import HighlightIcon from '@material-ui/icons/Highlight';
-import { Slide } from '@material-ui/core';
-import CloudIcon from '@material-ui/icons/Cloud';
-import CameraEnhanceIcon from '@material-ui/icons/CameraEnhance';
 import { IconButton } from '@material-ui/core';
 import styled from 'styled-components';
 import { Storage } from '../Storage';
+import FilterImage from '../Settings/Filter/FilterImage';
+import { Stage, Layer } from 'react-konva';
+
 class FilterTypeMenu extends Component {
   render() {
     return (
       <Storage.Consumer>
         {(store) => (
           <StFilterMenuCont>
-            <StFilterCont id="blur" onClick={store.changefilterType}>
-              <BlurOnIcon fontSize="large" />
-              <label>Blur</label>
+            <FilterImage h={0} s={0} v={0} img={store.img} />
+            <StFilterCont id="original" onClick={store.changeFilterType}>
+              <label>Original</label>
             </StFilterCont>
-
-            <StFilterCont id="brighten" onClick={store.changefilterType}>
-              <Brightness6Icon fontSize="large" />
-              <label>Brighten</label>
+            <StFilterCont id="daily" onClick={store.changeFilterType}>
+              <FilterImage h={3.5} s={0.14} v={0.14} img={store.img} />
+              <label>Daily</label>
             </StFilterCont>
-
-            <StFilterCont id="contrast" onClick={store.changefilterType}>
-              <Brightness3Icon fontSize="large" />
-              <label>Contrast</label>
+            <StFilterCont id="light" onClick={store.changeFilterType}>
+              <FilterImage h={0} s={0} v={0.14} img={store.img} />
+              <label>Light</label>
             </StFilterCont>
-
-            <StFilterCont id="emboss" onClick={store.changefilterType}>
-              <HighlightIcon fontSize="large" />
-              <label>Emboss</label>
+            <StFilterCont id="plain" onClick={store.changeFilterType}>
+              <FilterImage h={3.6} s={0.27} v={0.23} img={store.img} />
+              <label>Plain</label>
             </StFilterCont>
-
-            <StFilterCont id="enhance" onClick={store.changefilterType}>
-              <CameraEnhanceIcon fontSize="large" />
-              <label>Enhance</label>
+            <StFilterCont id="vintage" onClick={store.changeFilterType}>
+              <FilterImage h={-9.63} s={-1.44} v={0.27} img={store.img} />
+              <label>Vintage</label>
             </StFilterCont>
-
-            <StFilterCont id="grayscale" onClick={store.changefilterType}>
-              <CloudIcon fontSize="large" />
-              <label>Grayscale</label>
+            <StFilterCont id="sugar" onClick={store.changeFilterType}>
+              <FilterImage h={10} s={-0.2} v={0.27} img={store.img} />
+              <label>Sugar</label>
+            </StFilterCont>
+            <StFilterCont id="grayscale" onClick={store.changeFilterType}>
+              <label>B&W</label>
+            </StFilterCont>
+            <StFilterCont id="pro" onClick={store.changeFilterType}>
+              <FilterImage h={-5} s={0.13} v={0.16} img={store.img} />
+              <label>Pro</label>
+            </StFilterCont>
+            <StFilterCont id="retro" onClick={store.changeFilterType}>
+              <label>Retro</label>
+            </StFilterCont>
+            <StFilterCont id="momo" onClick={store.changeFilterType}>
+              <label>Momo</label>
+            </StFilterCont>
+            <StFilterCont id="soft" onClick={store.changeFilterType}>
+              <FilterImage h={5} s={0.07} v={0.08} img={store.img} />
+              <label>Soft</label>
             </StFilterCont>
           </StFilterMenuCont>
         )}

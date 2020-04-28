@@ -26,10 +26,6 @@ class Canvas extends Component {
               height={store.stageHistory[store.historyIdx].height}
               scaleX={store.stageHistory[store.historyIdx].scale}
               scaleY={store.stageHistory[store.historyIdx].scale}
-              // width={this.props.store.stageWidth}
-              // height={this.props.store.stageHeight}
-              // scaleX={this.props.store.scale}
-              // scaleY={this.props.store.scale}
             >
               <Layer
                 id="display-layer"
@@ -42,7 +38,7 @@ class Canvas extends Component {
               </Layer>
 
               <Layer id="edit-layer">
-                {store.curMode === 'adjust' ? (
+                {store.AdjustType === 'hsv' ? (
                   <Image
                     image={store.img}
                     filters={[Konva.Filters.HSV]}
@@ -50,11 +46,11 @@ class Canvas extends Component {
                     saturation={store.saturation}
                     value={store.value}
                     ref={(ref) => {
-                      store.adjustRef = ref;
+                      store.hsvRef = ref;
                     }}
                   />
                 ) : null}
-                {store.filterType === 'blur' ? (
+                {store.AdjustType === 'blur' ? (
                   <Image
                     image={store.img}
                     filters={[Konva.Filters.Blur]}
@@ -64,7 +60,7 @@ class Canvas extends Component {
                     }}
                   />
                 ) : null}
-                {store.filterType === 'brighten' ? (
+                {store.AdjustType === 'brighten' ? (
                   <Image
                     image={store.img}
                     filters={[Konva.Filters.Brighten]}
@@ -75,7 +71,7 @@ class Canvas extends Component {
                   />
                 ) : null}
 
-                {store.filterType === 'contrast' ? (
+                {store.AdjustType === 'contrast' ? (
                   <Image
                     image={store.img}
                     filters={[Konva.Filters.Contrast]}
@@ -86,12 +82,56 @@ class Canvas extends Component {
                   />
                 ) : null}
 
-                {store.filterType === 'grayscale' ? (
+                {store.AdjustType === 'grayscale' ? (
                   <Image
                     image={store.img}
                     filters={[Konva.Filters.Grayscale]}
                     ref={(ref) => {
                       store.grayscaleRef = ref;
+                    }}
+                  />
+                ) : null}
+
+                {store.AdjustType === 'mask' ? (
+                  <Image
+                    image={store.img}
+                    filters={[Konva.Filters.Mask]}
+                    threshold={store.maskVal}
+                    ref={(ref) => {
+                      store.maskRef = ref;
+                    }}
+                  />
+                ) : null}
+                {store.AdjustType === 'pixelate' ? (
+                  <Image
+                    image={store.img}
+                    filters={[Konva.Filters.Pixelate]}
+                    pixelSize={store.pixelateVal}
+                    ref={(ref) => {
+                      store.pixelateRef = ref;
+                    }}
+                  />
+                ) : null}
+                {store.AdjustType === 'noise' ? (
+                  <Image
+                    image={store.img}
+                    filters={[Konva.Filters.Noise]}
+                    noise={store.noiseVal}
+                    ref={(ref) => {
+                      store.noiseRef = ref;
+                    }}
+                  />
+                ) : null}
+
+                {store.curMode === 'filter' ? (
+                  <Image
+                    image={store.img}
+                    filters={[Konva.Filters.HSV]}
+                    hue={store.filterH}
+                    saturation={store.filterS}
+                    value={store.filterV}
+                    ref={(ref) => {
+                      store.filterRef = ref;
                     }}
                   />
                 ) : null}

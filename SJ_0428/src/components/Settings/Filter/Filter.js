@@ -14,6 +14,7 @@ class Filter extends React.Component {
     this.setState({
       filterRef: filtersRef,
     });
+    console.log("필터 개수 : " + filtersRef.length);
   }
 
   changeFilter = (e) => {
@@ -23,7 +24,8 @@ class Filter extends React.Component {
       filterRef[idx].hue,
       filterRef[idx].saturation,
       filterRef[idx].luminance,
-      filterRef[idx].blur
+      filterRef[idx].blur,
+      filterRef[idx].contrast
     );
   };
 

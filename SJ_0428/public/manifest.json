@@ -25,6 +25,6 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#ffffff",
-  "backgound_image": "url(AppBackground.jpg)"
+  "theme_color": "#000000",
+  "backgound_image": "url(MainBackground.jpg)"
 }

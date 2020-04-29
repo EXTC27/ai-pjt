@@ -57,7 +57,6 @@ const StMainCont = styled.div`
   justify-content: center;
   align-items: center;
 
-  /* background-color: mintcream; */
   /* background-image: url('MainBackground.jpg'); */
   background-image: url('AppBackground.jpg');
   background-position: center; 

@@ -87,7 +87,7 @@ const StButtonCont = styled(IconButton)`
     align-items: center;
   }
   label{
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Jua', sans-serif;
     padding-top: 2px;
     font-size: 50%;
   }

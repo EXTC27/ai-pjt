@@ -60,10 +60,11 @@ export const StorageInit = {
 
   filterHistory: [
     {
-      blur: 0,
       hue: 0,
       saturation: 0,
       luminance: 0,
+      contrast: 0,
+      blur: 0,
     },
   ],
 }

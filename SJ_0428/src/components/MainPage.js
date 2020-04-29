@@ -58,7 +58,8 @@ const StMainCont = styled.div`
   align-items: center;
 
   /* background-color: mintcream; */
-  background-image: url('MainBackground.jpg');
+  /* background-image: url('MainBackground.jpg'); */
+  background-image: url('AppBackground.jpg');
   background-position: center; 
   background-repeat: no-repeat;
   background-size: cover;

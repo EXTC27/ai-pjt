@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Storage } from "../../Storage";
 import styled from "styled-components";
-import { Zoom, Slider } from "@material-ui/core";
+import { Zoom, Slide, Slider } from "@material-ui/core";
 
 class AdjustSliders extends Component {
   render() {
@@ -16,16 +16,22 @@ class AdjustSliders extends Component {
               <Zoom in={true}>
                 <StSliderCont>
                   {this.props.channel === "hue" && (
-                    <StSlider
-                      id="hue"
-                      min={0}
-                      max={300}
-                      step={0.1}
-                      value={filterHist[histIdx].hue}
-                      onChange={changeAdjust}
-                    />
+                    <>
+                    <Slide in={true} direction={this.props.pre === '' ? 'left' : 'right'}>
+                      <StSlider
+                        id="hue"
+                        min={0}
+                        max={300}
+                        step={0.1}
+                        value={filterHist[histIdx].hue}
+                        onChange={changeAdjust}
+                      />
+                    </Slide>
+                    </>
                   )}
                   {this.props.channel === "saturation" && (
+                    <>
+                    <Slide in={true} direction={this.props.pre === 'hue' ? 'left' : 'right'}>
                     <StSlider
                       id="saturation"
                       min={-5}
@@ -34,8 +40,12 @@ class AdjustSliders extends Component {
                       value={filterHist[histIdx].saturation}
                       onChange={changeAdjust}
                     />
+                    </Slide>
+                    </>
                   )}
                   {this.props.channel === "luminance" && (
+                    <>
+                    <Slide in={true} direction={(this.props.pre === 'hue' || this.props.pre === 'saturation') ? 'left' : 'right'}>
                     <StSlider
                       id="luminance"
                       min={-1}
@@ -44,8 +54,12 @@ class AdjustSliders extends Component {
                       value={filterHist[histIdx].luminance}
                       onChange={changeAdjust}
                     />
+                    </Slide>
+                    </>
                   )}
                   {this.props.channel === "contrast" && (
+                    <>
+                    <Slide in={true} direction={this.props.pre === 'blur' ? 'right' : 'left'}>
                     <StSlider
                       id="contrast"
                       min={-100}
@@ -54,8 +68,12 @@ class AdjustSliders extends Component {
                       value={filterHist[histIdx].contrast}
                       onChange={changeAdjust}
                     />
+                    </Slide>
+                    </>
                   )}
                   {this.props.channel === "blur" && (
+                    <>
+                    <Slide in={true} direction={'left'}>
                     <StSlider
                       id="blur"
                       min={0}
@@ -64,6 +82,8 @@ class AdjustSliders extends Component {
                       value={filterHist[histIdx].blur}
                       onChange={changeAdjust}
                     />
+                    </Slide>
+                    </>
                   )}
                 </StSliderCont>
               </Zoom>
@@ -82,8 +102,8 @@ const StSliderCont = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
 `;
 
 const StSlider = styled(Slider)`

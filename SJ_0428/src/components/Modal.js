@@ -67,6 +67,7 @@ const StModalCont = styled.div`
 `
 
 const StConfirmCont = styled.div`
+  font-family: 'Jua', sans-serif;
   z-index: 200;
   display: flex;
   flex-direction: column;
@@ -104,6 +105,7 @@ const StBtnCont = styled.div`
   margin: 0 1rem 1rem 1rem;
   
   .MuiButton-label{
-    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Noto Sans KR', sans-serif; */
+    font-family: 'Jua', sans-serif;
   }
 `

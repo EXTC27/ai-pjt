@@ -15,7 +15,8 @@ class SegmentList extends Component {
           <StMsg>원본을 유지할 객체를 선택해주세요!</StMsg>
         }
         
-          <StSegList>
+        <StSegList>
+          <StSegCont>
           {store.allSegList.map((_img, i) => { return(
               <StSeg key={i} check={store.segCheckList[i]}>
                 {_img}
@@ -25,7 +26,8 @@ class SegmentList extends Component {
               </StSeg>
             )})
           }
-          </StSegList>
+          </StSegCont>
+        </StSegList>
         </StSegListCont>
       </Zoom>
     )
@@ -54,9 +56,14 @@ const StSegList = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0 0.2rem 0 0.2rem;
-  box-sizing: border-box;
 `;
+
+const StSegCont = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.2em solid rgba(0,0,0,0);
+`
 
 const StSeg = styled.div`
   display: flex;

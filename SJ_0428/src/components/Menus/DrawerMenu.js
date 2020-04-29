@@ -70,32 +70,33 @@ class DrawerMenu extends Component {
               <IconButton id={store.curMode} onClick={store.applyChange}>
                 <Check fontSize="large" />
               </IconButton>
-              {(store.curMode === "filter" ||
-                store.curMode === "adjust" ||
-                store.curMode === "segment" ||
-                store.curMode === "face") && (
+
+              {(store.curMode === "filter" || store.curMode === "adjust" ||
+                store.curMode === "segment" || store.curMode === "face") && 
                 <IconButton id={store.curMode} onClick={store.refreshChange}>
                   <Refresh fontSize="large" />
                 </IconButton>
-              )}
+              }
+              
               <IconButton id={store.curMode} onClick={store.cancelChange}>
                 <Clear fontSize="large" />
               </IconButton>
             </StMenuCont>
 
             <StSettingCont>
-              {
-                store.curMode === "rotate" && <RotateMenu />
+              {store.curMode === "rotate" && <RotateMenu />
                 //<div>
                 //  회전 부분입니다.
                 //</div>
               }
 
-              {store.curMode === "filter" && (
+              {store.curMode === "filter" && //필터 부분
                 <Filter store={store} changeFilter={store.changeFilter} />
-              )}
+              }
 
-              {store.curMode === "adjust" && <Adjust store={store} />}
+              {store.curMode === "adjust" && //조정 부분
+                <Adjust store={store} />
+              }
 
               {store.curMode === "segment" && ( //객체찾기 부분입니다.
                 <>
@@ -202,7 +203,7 @@ const StSettingCont = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;

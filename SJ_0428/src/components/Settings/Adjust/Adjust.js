@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AdjustSliders from "./AdjustSliders";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Button } from "@material-ui/core";
 
 class Adjust extends Component {
@@ -8,18 +8,28 @@ class Adjust extends Component {
     super(props);
     this.state = {
       channel: "hue",
+      pre: '',
     };
+  }
+  setStateAsync(state) {
+    return new Promise((resolve) => {
+      this.setState(state, resolve);
+    });
   }
 
   tabChannel = (e) => {
     // const _channel = e.currentTarget.id
-    this.setState({
-      channel: e.currentTarget.id,
-    });
+    this.setStateAsync({
+      pre: this.state.channel,
+    })
+    .then(
+      this.setState({
+        channel: e.currentTarget.id,
+      })
+    )
   };
 
   render() {
-    const check = this.state.channel;
     return (
       <StAdjustCont>
         <StTabCont>
@@ -93,7 +103,8 @@ class Adjust extends Component {
         </StTabCont>
 
         <StSliderCont>
-          <AdjustSliders channel={this.state.channel} />
+          <AdjustSliders channel={this.state.channel} pre={this.state.pre}/>
+          {/* <AdjustSliders channel={this.state.channel} store={this.props.store}/> */}
         </StSliderCont>
       </StAdjustCont>
     );

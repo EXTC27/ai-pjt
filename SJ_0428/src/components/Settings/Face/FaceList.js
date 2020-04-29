@@ -16,12 +16,14 @@ class FaceList extends Component {
         }
 
           <StFaceList>
+          <StFaceCont>
           {store.allFaceList.map((_img, i) => {return(
-              <StSeg key={i} check={store.faceCheckList[i]}>
+              <StFace key={i} check={store.faceCheckList[i]}>
                 {_img}
-              </StSeg>
+              </StFace>
             )})
           }
+          </StFaceCont>
           </StFaceList>
         </StFaceListCont>
       </Zoom>
@@ -50,11 +52,16 @@ const StFaceList = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0 0.2rem 0 0.2rem;
-  box-sizing: border-box;
 `;
 
-const StSeg = styled.div`
+const StFaceCont = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.2em solid rgba(0,0,0,0);
+`
+
+const StFace = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

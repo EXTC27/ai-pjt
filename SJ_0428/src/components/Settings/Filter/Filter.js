@@ -1,7 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import { Button } from "@material-ui/core";
 import { filtersRef } from "./FilterRef";
+import styled from "styled-components";
+import { Button, Slide } from "@material-ui/core";
+
 class Filter extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +15,7 @@ class Filter extends React.Component {
     this.setState({
       filterRef: filtersRef,
     });
-    console.log("필터 개수 : " + filtersRef.length);
+    // console.log("필터 개수 : " + filtersRef.length);
   }
 
   changeFilter = (e) => {
@@ -34,6 +35,8 @@ class Filter extends React.Component {
     return (
       <StFilterCont>
         <StSliderCont>
+
+        <Slide in={true} direction="left" timeout={500}>
           <StBtnCont>
             {filterRef.map((filter, idx) => {
               return (
@@ -43,36 +46,40 @@ class Filter extends React.Component {
               );
             })}
           </StBtnCont>
+        </Slide>
+
         </StSliderCont>
       </StFilterCont>
     );
   }
-}
+} export default Filter;
 
 const StFilterCont = styled.div`
+  overflow: scroll;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
-  /* justify-content: center; */
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
+`;
+
+const StSliderCont = styled.div`
+  /* border: 1px solid rgba(0, 0, 0, 0.23); */
+  /* width: 100%;
+  height: 100%; */
 `;
 
 const StBtnCont = styled.div`
   display: flex;
-  overflow: auto;
+  /* overflow: auto; */
+  border: 0.2em solid rgba(0, 0, 0, 0);
   .MuiButton-root {
+    background-color: gray;
+    margin: 0.2rem;
   }
-  .MuiButton-outlined {
+  /* .MuiButton-outlined {
     border-bottom-color: rgba(0, 0, 0, 0);
-  }
+  } */
 `;
 
-const StSliderCont = styled.div`
-  /* border: 1px solid rgba(0, 0, 0, 0); */
-  border: 1px solid rgba(0, 0, 0, 0.23);
-  width: 100%;
-  height: 100%;
-`;
-
-export default Filter;

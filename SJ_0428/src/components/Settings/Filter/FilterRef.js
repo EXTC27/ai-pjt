@@ -1,0 +1,126 @@
+export const filtersRef = [
+  {
+    name: "original",
+    blur: 0,
+    hue: 0,
+    saturation: 0,
+    luminance: 0,
+  },
+  {
+    name: "daily",
+    hue: 0,
+    saturation: 0.16,
+    luminance: -0.0,
+    blur: 0,
+  },
+  {
+    name: "light",
+    hue: 0,
+    saturation: 0.18,
+    luminance: 0.08,
+    blur: 0,
+  },
+  {
+    name: "plain",
+    hue: 3.8,
+    saturation: 0.08,
+    luminance: 0.06,
+    blur: 0,
+  },
+
+  {
+    name: "cream",
+    hue: 0,
+    saturation: 0.18,
+    luminance: 0.19,
+    blur: 0,
+  },
+
+  {
+    name: "pure",
+    hue: 0,
+    saturation: 0.04,
+    luminance: 0.13,
+    blur: 0,
+  },
+  {
+    name: "grayscale",
+    hue: 0,
+    saturation: -5,
+    luminance: -0.03,
+    blur: 0,
+  },
+  {
+    name: "BS",
+    hue: 0,
+    saturation: -0.13,
+    luminance: 0.06,
+    blur: 0,
+  },
+  {
+    name: "frozen",
+    hue: 3.8,
+    saturation: -0.38,
+    luminance: 0.11,
+    blur: 0,
+  },
+  {
+    name: "yummy",
+    hue: 0,
+    saturation: 0.38,
+    luminance: -0.18,
+    blur: 0,
+  },
+  {
+    name: "milk",
+    hue: 0,
+    saturation: -0.21,
+    luminance: -0.01,
+    blur: 0,
+  },
+  {
+    name: "crystal",
+    hue: 0,
+    saturation: 0.04,
+    luminance: 0.03,
+    blur: 0,
+  },
+  {
+    name: "cloud",
+    hue: 0,
+    saturation: 0,
+    luminance: -0.13,
+    blur: 0,
+  },
+  {
+    name: "mood",
+    hue: 0,
+    saturation: -0.04,
+    luminance: -0.06,
+    blur: 0,
+  },
+  {
+    name: "loveletter",
+    hue: 6.4,
+    saturation: 0.21,
+    luminance: 0.06,
+    blur: 0,
+  },
+  {
+    name: "baby",
+    hue: 1.3,
+    saturation: 0.21,
+    luminance: 0.04,
+    blur: 0,
+  },
+  {
+    name: "momo",
+    hue: 0,
+    saturation: 0.47,
+    luminance: 0.13,
+    blur: 0,
+  },
+];
+// export const getFilters = () => {
+//   return filtersRef;
+// };

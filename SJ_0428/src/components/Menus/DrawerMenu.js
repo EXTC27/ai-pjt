@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { IconButton, Button } from "@material-ui/core";
 import { Clear, Check, Refresh } from "@material-ui/icons";
 import RotateMenu from "../Settings/Rotate/RotateMenu";
+import Filter from "../Settings/Filter/Filter";
 
 class DrawerMenu extends Component {
   constructor(props) {
@@ -87,7 +88,9 @@ class DrawerMenu extends Component {
                 //  회전 부분입니다.
                 //</div>
               }
-              {store.curMode === "filter" && <div>필터 부분입니다.</div>}
+              {store.curMode === "filter" && (
+                <Filter store={store} changeFilter={store.changeFilter} />
+              )}
               {store.curMode === "adjust" && <Adjust store={store} />}
               {store.curMode === "segment" && ( //객체찾기 부분입니다.
                 <>

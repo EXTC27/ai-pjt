@@ -99,8 +99,34 @@ class App extends Component {
       ],
 
       changeAdjust: this.changeAdjust,
+      changeFilter: this.changeFilter,
     };
   }
+
+  changeFilter = async (hue, saturation, luminance, blur) => {
+    console.log("값 :" + hue + "," + saturation + "," + luminance + "," + blur);
+    const layer = this.state.layerRef.getLayer();
+    const img = layer.find(`#${this.state.historyIdx}`)[0];
+    img.cache();
+    img.filters([Konva.Filters.Blur, Konva.Filters.HSL]);
+
+    await this.setStateAsync({
+      filterHistory: update(this.state.filterHistory, {
+        [this.state.historyIdx]: {
+          hue: { $set: hue },
+          saturation: { $set: saturation },
+          luminance: { $set: luminance },
+          blur: { $set: blur },
+        },
+      }),
+    });
+
+    img.hue(hue);
+    img.saturation(saturation);
+    img.luminance(luminance);
+    img.blurRadius(blur);
+    layer.batchDraw();
+  };
 
   changeAdjust = async (e) => {
     const value = e.currentTarget.value;

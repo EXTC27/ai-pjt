@@ -17,7 +17,13 @@ class EditorPage extends Component {
       <Storage.Consumer>
       {store => {
         let _msg = "설정한 값들을\n전부 초기화하시겠습니까?"
-        if(store.imgHistory.length === 1) {
+        if(store.imgHistory.length === 1 && 
+          store.filterHistory[0].hue === 0 && 
+          store.filterHistory[0].saturation === 0 && 
+          store.filterHistory[0].luminance === 0 && 
+          store.filterHistory[0].contrast === 0 && 
+          store.filterHistory[0].blur === 0
+          ) {
           _msg = "현재 원본입니다!"
         }
         if(store.curMode === "backToMain"){

@@ -19,26 +19,26 @@ class AdjustSliders extends Component {
                 <StSliderCont>
                 {this.props.channel === 'hue' &&  
                   <StSlider id="hue" min={0} max={300} step={0.1} 
-                  defaultValue={filterHist[histIdx].hue}
+                  // defaultValue={filterHist[histIdx].hue}
                   value={filterHist[histIdx].hue}
                   onChange={changeAdjust}/>
                 }
                 {this.props.channel === 'saturation' &&  
                   <StSlider id="saturation" min={-5} max={5} step={0.01}
-                  defaultValue={filterHist[histIdx].saturation}
-                  value={filterHist[histIdx].luminance}
+                  // defaultValue={filterHist[histIdx].saturation}
+                  value={filterHist[histIdx].saturation}
                   onChange={changeAdjust}/>
                 }
                 {this.props.channel === 'luminance' &&  
                   <StSlider id="luminance" min={-1} max={1} step={0.01}
-                  defaultValue={filterHist[histIdx].luminance}
+                  // defaultValue={filterHist[histIdx].luminance}
                   value={filterHist[histIdx].luminance}
                   onChange={changeAdjust}/>
                 }
                 {this.props.channel === 'blur' &&  
                   <StSlider id="blur" min={0} max={50} step={10}
-                  defaultValue={filterHist[histIdx].luminance}
-                  value={filterHist[histIdx].luminance}
+                  // defaultValue={filterHist[histIdx].blur}
+                  value={filterHist[histIdx].blur}
                   onChange={changeAdjust}/>
                 }
                 </StSliderCont>

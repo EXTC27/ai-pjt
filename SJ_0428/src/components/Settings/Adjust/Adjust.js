@@ -38,6 +38,7 @@ class Adjust extends Component {
           <StBtn id='blur' 
           style={{background: `${this.state.channel === 'blur' ? 'rgb(63,63,63)' : 'rgb(30,30,30)'}`}}
           onClick={this.tabChannel}>블러</StBtn>
+          
         </StTabCont>
 
         <StSliderCont>

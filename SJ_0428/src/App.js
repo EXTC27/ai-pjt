@@ -11,6 +11,7 @@ import EditorPage from './components/EditorPage'
 import * as Methods from './components/Methods'
 import * as CropRect from './components/Settings/Crop/CropRect'
 import * as BlurRect from './components/Settings/Face/BlurRect'
+import * as AdjustMethods from './components/Settings/Adjust/AdjustMethods'
 
 class App extends Component{
   constructor(props){
@@ -163,7 +164,7 @@ class App extends Component{
     
     if(this.state.curMode === 'origin'){
       if(_confirm === 'yes'){
-        this.setState({
+        this.setStateAsync({
           curMode: '',
           imgHistory: [this.state.imgHistory[0]],
           stageHistory: [this.state.stageHistory[0]],
@@ -173,10 +174,27 @@ class App extends Component{
           segCheckList: this.state.segCheckList.map((value, i) => value && false),
 
           faceCheckList: this.state.faceCheckList.map((value, i) => value && false),
-          // allFaceList: [],
-          // faceList: [],
-          // faceCheckList: [],
-          // faceLocaList : [],
+          
+          filterHistory: update(this.state.filterHistory, {
+            [this.state.historyIdx]: {
+              blur: { $set: 0 },
+              hue: { $set: 0 },
+              saturation: { $set: 0 },
+              luminance: { $set: 0 },
+            },
+          }),
+        })
+        .then(() => {
+          const layer = this.state.layerRef.getLayer();
+          const img = layer.find(`#${this.state.historyIdx}`)[0];
+          img.cache();
+          img.filters([Konva.Filters.Blur, Konva.Filters.HSL]);
+          img.blurRadius(0);
+          img.hue(0);
+          img.saturation(0);
+          img.luminance(0);
+          layer.batchDraw()
+          // AdjustMethods.InitDispAdjust(this.state.layerRef.getLayer(), this.state.historyIdx)
         })
       }
       else{
@@ -273,9 +291,20 @@ class App extends Component{
     }
   }
 
-  changeFilter = (hue, saturation, luminance, blur) => {
+  changeFilter = async (hue, saturation, luminance, blur) => {
+    // await this.setStateAsync({
+    //   filterHistory: update(this.state.filterHistory, {
+    //     [this.state.historyIdx]: {
+    //       blur: { $set: 0 },
+    //       hue: { $set: 0 },
+    //       saturation: { $set: 0 },
+    //       luminance: { $set: 0 },
+    //     },
+    //   }),
+    // })
     const layer = this.state.layerRef.getLayer();
     const img = layer.find(`#${this.state.historyIdx}`)[0];
+    console.log(img)
     img.cache();
     img.filters([Konva.Filters.Blur, Konva.Filters.HSL]);
     img.hue(hue);
@@ -331,10 +360,6 @@ class App extends Component{
       });
       img.luminance(value);
     }
-    // const { hue, saturation, luminance, blur } = this.state.filterHistory[
-    //   this.state.historyIdx
-    // ];
-    // console.log(hue + "," + saturation + "," + luminance + "," + blur);
     layer.batchDraw();
   };
 
@@ -364,28 +389,6 @@ class App extends Component{
           height: (_height * _ratio) / 2,
         }
         CropRect.createCropRect(this.state.stageRef, _initVal)
-      }
-
-      else if(_curMode === 'tag'){
-        const formData = new FormData();
-        formData.append('images', this.state.imgFile);
-        axios({
-          method : 'post',
-          url : `${URL}/tags`,
-          data : formData,
-        }).then(function(response){
-          this.setState({
-            loading: false,
-            // imgTag : response.data.response
-            tagList : response.data.response
-          })
-        }.bind(this))
-        .catch(function(error){
-          this.setState({
-            loading: false,
-            // imgTag : ["태그를 가져오지 못했습니다. ㅠㅅㅠ"]
-          })
-        }.bind(this))
       }
 
       else if(_curMode === 'segment'){ //원본 사진에서 객체를 뽑아내기 위해 서버쪽에 axios 요청을 보낸다.
@@ -491,7 +494,7 @@ class App extends Component{
                 faceList: response.data.response.map((_base64, i) => {
                     return(
                     <Image key={i}
-                      id={`blur`}
+                      id={`face-blur`}
                       x={_base64.x}
                       y={_base64.y}
                       width={_base64.width}
@@ -516,6 +519,28 @@ class App extends Component{
               // allFaceList : ["얼굴을 인식하지 못했습니다."],
             })
           }
+        }
+
+        else if(_curMode === 'tag'){
+          const formData = new FormData();
+          formData.append('images', this.state.imgFile);
+          axios({
+            method : 'post',
+            url : `${URL}/tags`,
+            data : formData,
+          }).then(function(response){
+            this.setState({
+              loading: false,
+              // imgTag : response.data.response
+              tagList : response.data.response
+            })
+          }.bind(this))
+          .catch(function(error){
+            this.setState({
+              loading: false,
+              // imgTag : ["태그를 가져오지 못했습니다. ㅠㅅㅠ"]
+            })
+          }.bind(this))
         }
 
         else{
@@ -559,7 +584,7 @@ class App extends Component{
       })
     }
 
-  }
+  };
 
   applyChange = async () => {
     const _curHistIdx = this.state.historyIdx
@@ -586,6 +611,7 @@ class App extends Component{
         width: cropRect.width * cropRect.scaleX,
         height: cropRect.height * cropRect.scaleY,
       }
+      console.log(cropInfo)
       this.setStateAsync({
         allSegList: [],
         segLabels: [],
@@ -599,9 +625,14 @@ class App extends Component{
         historyIdx: this.state.historyIdx + 1,
         stageHistory: this.state.stageHistory.concat(Methods.calcStage(cropInfo.width, cropInfo.height)),
         imgHistory: this.state.imgHistory.concat(
+          // <Image 
+          //   key={this.state.historyIdx + 1} 
+          //   id={String(this.state.historyIdx + 1)}
+          //   image={_img}
+          // />
           <Rect 
             key={this.state.historyIdx + 1} 
-            id={this.state.historyIdx + 1}
+            id={String(this.state.historyIdx + 1)}
             width={cropInfo.width}
             height={cropInfo.height}
             fillPatternImage={_img}
@@ -611,6 +642,8 @@ class App extends Component{
             }}
           />
         ),
+
+        filterHistory: this.state.filterHistory.concat([this.state.filterHistory[this.state.historyIdx]])
       })
     }
 
@@ -649,14 +682,14 @@ class App extends Component{
       })
     }
 
-    else if(this.state.curMode === 'segment'){ 
-    }
+    // else if(this.state.curMode === 'segment'){ 
+    // }
 
-    else if(this.state.curMode === 'face'){ 
-    }
+    // else if(this.state.curMode === 'face'){ 
+    // }
 
-    else if(this.state.curMode === 'adjust'){
-    }
+    // else if(this.state.curMode === 'adjust'){
+    // }
 
     // console.log('applyChange: ', )
 
@@ -667,11 +700,7 @@ class App extends Component{
   }
 
   refreshChange = () => { //설정 값 새로고침 함수
-    if(this.state.curMode === 'filter'){
-
-    }
-
-    else if(this.state.curMode === 'adjust'){ 
+    if(this.state.curMode === 'filter' || this.state.curMode === 'adjust'){ 
       this.setStateAsync({
         filterHistory: update(this.state.filterHistory, {
           [this.state.historyIdx]: {
@@ -692,6 +721,7 @@ class App extends Component{
         img.saturation(0);
         img.luminance(0);
         layer.batchDraw()
+        // AdjustMethods.InitDispAdjust(this.state.layerRef.getLayer(), this.state.historyIdx)
       })
     }
 

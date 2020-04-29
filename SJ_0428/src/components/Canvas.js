@@ -42,11 +42,11 @@ class Canvas extends Component {
                   }
                 </Layer>
 
-                {
+                {/* {
                   store.curMode !== '' &&
                   <Layer id='edit-layer'>
                   </Layer>
-                }
+                } */}
 
                 {
                   store.curMode === 'crop' &&

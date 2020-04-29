@@ -4,7 +4,6 @@ import Loading from "../Loading";
 import Adjust from "../Settings/Adjust/Adjust";
 import SegmentList from "../Settings/Segment/SegmentList";
 import FaceList from "../Settings/Face/FaceList";
-import TagList from "../Settings/Tag/TagList";
 
 import styled from "styled-components";
 import { IconButton, Button } from "@material-ui/core";

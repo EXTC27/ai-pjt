@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Slide } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { filtersRef } from "./FilterRef";
 class Filter extends React.Component {
   constructor(props) {

@@ -9,8 +9,7 @@ import * as BlurRect from "./components/Settings/Face/BlurRect";
 import Konva from "konva";
 
 import axios from "axios";
-import Adjust from "./components/Settings/Adjust/Adjust";
-import { Image, Rect, Circle } from "react-konva";
+import { Image, Rect } from "react-konva";
 import update from "react-addons-update";
 
 class App extends Component {

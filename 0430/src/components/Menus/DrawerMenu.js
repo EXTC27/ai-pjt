@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Storage } from "../Storage";
+import { Storage, Msg } from "../Storage";
 import Loading from "../Loading";
 import Filter from "../Settings/Filter/Filter";
 import Adjust from "../Settings/Adjust/Adjust";
@@ -86,9 +86,10 @@ class DrawerMenu extends Component {
               </IconButton>
             </StMenuCont>
 
-            {/* ///////////////////////// */}
             <StMsg>
-              
+            {
+              Msg[`${store.curMode}`]
+            }
             </StMsg>
 
             <StSettingCont id='setting-container'>
@@ -233,6 +234,6 @@ const StSettingCont = styled.div`
 `;
 
 const StMsg = styled.div`
-/* font-size: 110%; */
+  margin: 5px 0 5px 0;
   color: white;
 `;

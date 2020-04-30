@@ -3,33 +3,31 @@ export const URL = 'https://i02a301.p.ssafy.io/api'
 export const Storage = React.createContext({});
 export const StorageInit = {
   loading: false,
-  // innerW: window.innerWidth,
-  // innerH: window.innerHeight,
+  innerW: window.innerWidth,
+  innerH: window.innerHeight,
 
   imgFile: null,
-  imgURL: '',
+  imgURL: "",
   img: null,
   imgWidth: 0,
   imgHeight: 0,
   imgHistory: [],
 
-  tagList: [],
-
   allSegList: [],
   segLabels: [],
   segList: [],
   segCheckList: [],
-  segHistory: [],
 
   allFaceList: [],
   faceList: [],
   faceCheckList: [],
-  faceHistory: [],
 
-  //rotate
+  tagList: [],
+  tagCheckList: [],
+
   rotateDegree: 0,
   rotateCount: 0,
-  rotateMode: '',
+  rotateMode: "",
   rotating: false,
   tempStageHistory: {
     width: 0,
@@ -37,7 +35,7 @@ export const StorageInit = {
     scale: 0,
     ratio: 0,
   },
-  tempImgHistory: null,
+  tempImgTag: null,
   beforeImg: {
     width: 0,
     height: 0,
@@ -50,11 +48,11 @@ export const StorageInit = {
       height: 0,
       scale: 0,
       ratio: 0,
-    }
+    },
   ],
   stageIdx: 0,
 
-  curMode: '',
+  curMode: "",
 
   historyIdx: 0,
 
@@ -67,4 +65,14 @@ export const StorageInit = {
       blur: 0,
     },
   ],
+};
+
+export const Msg = {
+  'crop': '원하는 범위를 잘라냅니다!',
+  'rotate': '원하는 방향으로 회전합니다!',
+  'filter': '필터를 적용해 보세요!',
+  'adjust': '원하는 채널을 조정해보세요!',
+  'segment': '원본을 유지할 객체를 선택하세요!',
+  'face': '블러 처리할 얼굴을 선택하세요!',
+  'tag': '클립보드에 복사할 태그를 선택하세요!',
 }

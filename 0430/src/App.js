@@ -457,7 +457,6 @@ class App extends Component{
             axios({
               method: "post",
               url: `${URL}/images`,
-              // url: `http://13.124.235.166:5002/images`,
               data: formData,
             }).then((res) => {
               const resData = res.data;
@@ -493,7 +492,6 @@ class App extends Component{
                   });
                 };
               });
-
               this.setStateAsync({
                 loading: false,
               }).then(
@@ -517,6 +515,7 @@ class App extends Component{
             console.log("Axios Error", err);
             this.setState({
               loading: false,
+
             });
           }
         } 

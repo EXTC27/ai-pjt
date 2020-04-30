@@ -9,11 +9,6 @@ class SegmentList extends Component {
     return(
       <Zoom in={true}>
         <StSegListCont>
-        {store.allSegList.length === 0 ?
-          <StMsg>죄송해요. 못 찾겠어요. ㅠㅅㅠ</StMsg>
-          :
-          <StMsg>원본을 유지할 객체를 선택하세요!</StMsg>
-        }
         
         <StSegList>
           <StSegCont>

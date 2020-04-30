@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { filtersRef } from "./FilterRef";
+import FilterPreview from "./FilterPreview";
 class Filter extends React.Component {
   constructor(props) {
     super(props);
@@ -34,15 +35,22 @@ class Filter extends React.Component {
     return (
       <StFilterCont>
         <StSliderCont>
-          <StBtnCont>
-            {filterRef.map((filter, idx) => {
-              return (
-                <Button key={idx} id={idx} onClick={this.changeFilter}>
-                  {filter.name}
-                </Button>
-              );
-            })}
-          </StBtnCont>
+          <img
+            src="C:\Users\adamd\Desktop\ai-pjt\SJ_0428\src\components\Settings\Filter\imgs\original.jpg"
+            name="original"
+            alt="original"
+            onClick={this.props.store.applyfilter}
+          />
+          ;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
+          <img src="./imgs/original.jpg" name="original" alt="original" />;
         </StSliderCont>
       </StFilterCont>
     );

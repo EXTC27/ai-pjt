@@ -1,6 +1,7 @@
 export const filtersRef = [
   {
     name: "original",
+    src: "./imgs/original.jpg",
     blur: 0,
     hue: 0,
     saturation: 0,
@@ -9,6 +10,7 @@ export const filtersRef = [
   },
   {
     name: "daily",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: 0.16,
     luminance: -0.0,
@@ -17,6 +19,7 @@ export const filtersRef = [
   },
   {
     name: "light",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: 0.18,
     luminance: 0.08,
@@ -25,6 +28,8 @@ export const filtersRef = [
   },
   {
     name: "plain",
+    src: "./imgs/original.jpg",
+
     hue: 3.8,
     saturation: 0.08,
     luminance: 0.06,
@@ -34,6 +39,8 @@ export const filtersRef = [
 
   {
     name: "cream",
+    src: "./imgs/original.jpg",
+
     hue: 0,
     saturation: 0.18,
     luminance: 0.19,
@@ -43,6 +50,8 @@ export const filtersRef = [
 
   {
     name: "pure",
+
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: 0.04,
     luminance: 0.13,
@@ -51,6 +60,7 @@ export const filtersRef = [
   },
   {
     name: "grayscale",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: -5,
     luminance: -0.03,
@@ -59,6 +69,7 @@ export const filtersRef = [
   },
   {
     name: "BS",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: -0.13,
     luminance: 0.06,
@@ -67,6 +78,7 @@ export const filtersRef = [
   },
   {
     name: "frozen",
+    src: "./imgs/original.jpg",
     hue: 3.8,
     saturation: -0.38,
     luminance: 0.11,
@@ -75,6 +87,7 @@ export const filtersRef = [
   },
   {
     name: "yummy",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: 0.38,
     luminance: -0.18,
@@ -83,6 +96,7 @@ export const filtersRef = [
   },
   {
     name: "milk",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: -0.21,
     luminance: -0.01,
@@ -91,6 +105,7 @@ export const filtersRef = [
   },
   {
     name: "crystal",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: 0.04,
     luminance: 0.03,
@@ -99,6 +114,7 @@ export const filtersRef = [
   },
   {
     name: "cloud",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: 0,
     luminance: -0.13,
@@ -107,6 +123,7 @@ export const filtersRef = [
   },
   {
     name: "mood",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: -0.04,
     luminance: -0.06,
@@ -115,6 +132,7 @@ export const filtersRef = [
   },
   {
     name: "loveletter",
+    src: "./imgs/original.jpg",
     hue: 6.4,
     saturation: 0.21,
     luminance: 0.06,
@@ -123,6 +141,7 @@ export const filtersRef = [
   },
   {
     name: "baby",
+    src: "./imgs/original.jpg",
     hue: 1.3,
     saturation: 0.21,
     luminance: 0.04,
@@ -131,6 +150,7 @@ export const filtersRef = [
   },
   {
     name: "momo",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: 0.47,
     luminance: 0.13,
@@ -139,6 +159,7 @@ export const filtersRef = [
   },
   {
     name: "winter",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: -0.34,
     luminance: 0.26,
@@ -147,6 +168,7 @@ export const filtersRef = [
   },
   {
     name: "retro",
+    src: "./imgs/original.jpg",
     hue: 6.4,
     saturation: -0.07,
     luminance: 0.19,
@@ -155,6 +177,7 @@ export const filtersRef = [
   },
   {
     name: "alight",
+    src: "./imgs/original.jpg",
     hue: 9.7,
     saturation: 0.56,
     luminance: 0.25,
@@ -163,6 +186,7 @@ export const filtersRef = [
   },
   {
     name: "aurora",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: -0.09,
     luminance: 0.3,
@@ -171,6 +195,7 @@ export const filtersRef = [
   },
   {
     name: "vintage",
+    src: "./imgs/original.jpg",
     hue: 12.1,
     saturation: 0.12,
     luminance: 0.16,
@@ -179,6 +204,7 @@ export const filtersRef = [
   },
   {
     name: "pretty",
+    src: "./imgs/original.jpg",
     hue: 1.6,
     saturation: 0.1,
     luminance: 0.33,
@@ -187,6 +213,7 @@ export const filtersRef = [
   },
   {
     name: "natural",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: 0.18,
     luminance: 0.2,
@@ -195,6 +222,7 @@ export const filtersRef = [
   },
   {
     name: "blossom",
+    src: "./imgs/original.jpg",
     hue: 2.4,
     saturation: -0.18,
     luminance: 0.36,
@@ -203,6 +231,7 @@ export const filtersRef = [
   },
   {
     name: "drama",
+    src: "./imgs/original.jpg",
     hue: 4.8,
     saturation: -3.38,
     luminance: 0.23,
@@ -211,6 +240,7 @@ export const filtersRef = [
   },
   {
     name: "midnight",
+    src: "./imgs/original.jpg",
     hue: 8.9,
     saturation: 0.66,
     luminance: -0.12,
@@ -219,6 +249,7 @@ export const filtersRef = [
   },
   {
     name: "night",
+    src: "./imgs/original.jpg",
     hue: 5.6,
     saturation: -0.39,
     luminance: -0.16,
@@ -227,6 +258,7 @@ export const filtersRef = [
   },
   {
     name: "avatar",
+    src: "./imgs/original.jpg",
     hue: 156.1,
     saturation: 0.15,
     luminance: 0.02,
@@ -235,6 +267,7 @@ export const filtersRef = [
   },
   {
     name: "frozen",
+    src: "./imgs/original.jpg",
     hue: 0,
     saturation: -0.12,
     luminance: 0.12,

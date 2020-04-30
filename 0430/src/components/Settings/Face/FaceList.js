@@ -12,7 +12,7 @@ class FaceList extends Component {
         {store.allFaceList.length === 0 ?
           <StMsg>죄송해요. 못 찾겠어요. ㅠㅅㅠ</StMsg>
           :
-          <StMsg>블러 처리할 얼굴을 선택해주세요!</StMsg>
+          <StMsg>블러 처리할 얼굴을 선택하세요!</StMsg>
         }
 
           <StFaceList>

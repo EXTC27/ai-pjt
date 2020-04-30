@@ -21,7 +21,10 @@ class Modal extends Component {
           {
             this.props.pop ? <StOpacityBack/> : null
           }
-          <Zoom in={store.curMode === "origin" || store.curMode === "backToMain"} timeout={200} mountOnEnter unmountOnExit>
+          <Zoom in={store.curMode === "origin" || 
+                    store.curMode === "backToMain" || 
+                    store.curMode === "copy"} 
+                timeout={200} mountOnEnter unmountOnExit>
           <StModalCont>
             <StConfirmCont>
               <div className="top-deco"/>
@@ -107,5 +110,6 @@ const StBtnCont = styled.div`
   .MuiButton-label{
     /* font-family: 'Noto Sans KR', sans-serif; */
     font-family: 'Jua', sans-serif;
+    color: #8989f5;   
   }
 `

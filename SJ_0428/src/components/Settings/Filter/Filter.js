@@ -1,8 +1,10 @@
 import React from "react";
 import * as Methods from "../../Methods";
-import styled from "styled-components";
-import { Button } from "@material-ui/core";
+
 import { filtersRef } from "./FilterRef";
+import styled from "styled-components";
+import { Button, Slide } from "@material-ui/core";
+
 class Filter extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class Filter extends React.Component {
     this.setState({
       filterRef: filtersRef,
     });
-    console.log("필터 개수 : " + filtersRef.length);
+    // console.log("필터 개수 : " + filtersRef.length);
   }
 
   changeFilter = (e) => {
@@ -61,6 +63,7 @@ class Filter extends React.Component {
     return <StFilterCont>{list}</StFilterCont>;
   }
 }
+export default Filter;
 
 const StFilterCont = styled.div`
   overflow: scroll;
@@ -77,5 +80,3 @@ const StFilterCont = styled.div`
 const StImageCont = styled.div`
   margin: 0.2rem;
 `;
-
-export default Filter;

@@ -33,73 +33,30 @@ class Adjust extends Component {
     return (
       <StAdjustCont>
         <StTabCont>
-          <StBtn
-            id="hue"
-            style={{
-              background: `${
-                this.state.channel === "hue" ? "rgb(63,63,63)" : "rgb(30,30,30)"
-              }`,
-            }}
-            onClick={this.tabChannel}
-          >
-            색상
-          </StBtn>
+          <StBtn id='hue' 
+          style={{margin: '0px', color:`${this.state.channel === 'hue' ? 'white' : '#898985'}`, background: `${this.state.channel === 'hue' ? '#b277e8' : 'white'}`}}//`${this.state.channel === 'hue' ? 'rgb(63,63,63)' : 'rgb(30,30,30)'}`}} 
+          onClick={this.tabChannel}>색상</StBtn>
 
-          <StBtn
-            id="saturation"
-            style={{
-              background: `${
-                this.state.channel === "saturation"
-                  ? "rgb(63,63,63)"
-                  : "rgb(30,30,30)"
-              }`,
-            }}
-            onClick={this.tabChannel}
-          >
-            채도
-          </StBtn>
+          <StBtn id='saturation' 
+          style={{color:`${this.state.channel === 'saturation' ? 'white' : '#898985'}`, background: `${this.state.channel === 'saturation' ? '#b277e8' : 'white'}`}}//`${this.state.channel === 'hue' ? 'rgb(63,63,63)' : 'rgb(30,30,30)'}`}}
+          onClick={this.tabChannel}>채도</StBtn>
 
-          <StBtn
-            id="luminance"
-            style={{
-              background: `${
-                this.state.channel === "luminance"
-                  ? "rgb(63,63,63)"
-                  : "rgb(30,30,30)"
-              }`,
-            }}
-            onClick={this.tabChannel}
-          >
-            명도
-          </StBtn>
+          <StBtn id='luminance' 
+          style={{color:`${this.state.channel === 'luminance' ? 'white' : '#898985'}`, background: `${this.state.channel === 'luminance' ? '#b277e8' : 'white'}`}}//`${this.state.channel === 'hue' ? 'rgb(63,63,63)' : 'rgb(30,30,30)'}`}}
+          onClick={this.tabChannel}>명도</StBtn>
 
           <StBtn
             id="contrast"
-            style={{
-              background: `${
-                this.state.channel === "contrast"
-                  ? "rgb(63,63,63)"
-                  : "rgb(30,30,30)"
-              }`,
-            }}
+            style={{color:`${this.state.channel === 'contrast' ? 'white' : '#898985'}`, background: `${this.state.channel === 'contrast' ? '#b277e8' : 'white'}`}}//`${this.state.channel === 'hue' ? 'rgb(63,63,63)' : 'rgb(30,30,30)'}`}}
             onClick={this.tabChannel}
           >
             대조
           </StBtn>
 
-          <StBtn
-            id="blur"
-            style={{
-              background: `${
-                this.state.channel === "blur"
-                  ? "rgb(63,63,63)"
-                  : "rgb(30,30,30)"
-              }`,
-            }}
-            onClick={this.tabChannel}
-          >
-            블러
-          </StBtn>
+          <StBtn id='blur' 
+          style={{color:`${this.state.channel === 'blur' ? 'white' : '#898985'}`, background: `${this.state.channel === 'blur' ? '#b277e8' : 'white'}`}}//`${this.state.channel === 'hue' ? 'rgb(63,63,63)' : 'rgb(30,30,30)'}`}}
+          onClick={this.tabChannel}>블러</StBtn>
+          
         </StTabCont>
 
         <StSliderCont>
@@ -125,12 +82,12 @@ const StTabCont = styled.div`
   justify-content: center;
   width: 100%;
   padding-top: 4px;
-  background-color: rgb(30, 30, 30);
+  background-color: white;
 `;
 
 const StBtn = styled(Button)`
   font-family: 'Jua', sans-serif;
-  color: white;
+  color: black;
   border-radius: 10px 10px 0 0;
 `;
 

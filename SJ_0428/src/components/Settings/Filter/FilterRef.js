@@ -1,7 +1,8 @@
 export const filtersRef = [
   {
     name: "original",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     blur: 0,
     hue: 0,
     saturation: 0,
@@ -10,7 +11,8 @@ export const filtersRef = [
   },
   {
     name: "daily",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 1,
     saturation: 0.16,
     luminance: 0.1,
@@ -19,7 +21,8 @@ export const filtersRef = [
   },
   {
     name: "light",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: 0.18,
     luminance: 0.08,
@@ -28,7 +31,8 @@ export const filtersRef = [
   },
   {
     name: "plain",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
 
     hue: 3.8,
     saturation: 0.08,
@@ -39,7 +43,8 @@ export const filtersRef = [
 
   {
     name: "cream",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
 
     hue: 0,
     saturation: 0.18,
@@ -51,7 +56,8 @@ export const filtersRef = [
   {
     name: "pure",
 
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: 0.04,
     luminance: 0.13,
@@ -60,7 +66,8 @@ export const filtersRef = [
   },
   {
     name: "grayscale",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: -5,
     luminance: -0.03,
@@ -69,7 +76,8 @@ export const filtersRef = [
   },
   {
     name: "BS",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: -0.13,
     luminance: 0.06,
@@ -78,7 +86,8 @@ export const filtersRef = [
   },
   {
     name: "frozen",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 3.8,
     saturation: -0.38,
     luminance: 0.11,
@@ -87,7 +96,8 @@ export const filtersRef = [
   },
   {
     name: "yummy",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: 0.38,
     luminance: -0.18,
@@ -96,7 +106,8 @@ export const filtersRef = [
   },
   {
     name: "milk",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: -0.21,
     luminance: -0.01,
@@ -105,7 +116,8 @@ export const filtersRef = [
   },
   {
     name: "crystal",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: 0.04,
     luminance: 0.03,
@@ -114,7 +126,8 @@ export const filtersRef = [
   },
   {
     name: "cloud",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: 0,
     luminance: -0.13,
@@ -123,7 +136,8 @@ export const filtersRef = [
   },
   {
     name: "mood",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: -0.04,
     luminance: -0.06,
@@ -132,7 +146,8 @@ export const filtersRef = [
   },
   {
     name: "loveletter",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 6.4,
     saturation: 0.21,
     luminance: 0.06,
@@ -141,7 +156,8 @@ export const filtersRef = [
   },
   {
     name: "baby",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 1.3,
     saturation: 0.21,
     luminance: 0.04,
@@ -150,7 +166,8 @@ export const filtersRef = [
   },
   {
     name: "momo",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: 0.47,
     luminance: 0.13,
@@ -159,7 +176,8 @@ export const filtersRef = [
   },
   {
     name: "winter",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: -0.34,
     luminance: 0.2,
@@ -168,7 +186,8 @@ export const filtersRef = [
   },
   {
     name: "retro",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 6.4,
     saturation: -0.07,
     luminance: 0.19,
@@ -177,7 +196,8 @@ export const filtersRef = [
   },
   {
     name: "alight",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 9.7,
     saturation: 0.46,
     luminance: 0.15,
@@ -186,7 +206,8 @@ export const filtersRef = [
   },
   {
     name: "aurora",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: -0.09,
     luminance: -0.03,
@@ -195,7 +216,8 @@ export const filtersRef = [
   },
   {
     name: "vintage",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 12.1,
     saturation: -0.22,
     luminance: -0.07,
@@ -204,7 +226,8 @@ export const filtersRef = [
   },
   {
     name: "pretty",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 1.6,
     saturation: 0.09,
     luminance: 0.04,
@@ -213,7 +236,8 @@ export const filtersRef = [
   },
   {
     name: "natural",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: 0.18,
     luminance: 0.2,
@@ -222,7 +246,8 @@ export const filtersRef = [
   },
   {
     name: "blossom",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 2.4,
     saturation: -0.18,
     luminance: 0.11,
@@ -231,7 +256,8 @@ export const filtersRef = [
   },
   {
     name: "drama",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 4.8,
     saturation: -3.38,
     luminance: 0.17,
@@ -240,7 +266,8 @@ export const filtersRef = [
   },
   {
     name: "midnight",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 8.9,
     saturation: 0.66,
     luminance: -0.12,
@@ -249,7 +276,8 @@ export const filtersRef = [
   },
   {
     name: "night",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 5.6,
     saturation: -0.39,
     luminance: -0.16,
@@ -258,7 +286,8 @@ export const filtersRef = [
   },
   {
     name: "avatar",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 156.1,
     saturation: 0.15,
     luminance: 0.02,
@@ -267,7 +296,8 @@ export const filtersRef = [
   },
   {
     name: "cute",
-    src: "https://github.com/EXTC27/ai-pjt/blob/master/imgs/cat.jpg?raw=true",
+    src:
+      "https://github.com/EXTC27/ai-pjt/blob/master/imgs/alight.jpg?raw=true",
     hue: 0,
     saturation: -0.12,
     luminance: 0.12,

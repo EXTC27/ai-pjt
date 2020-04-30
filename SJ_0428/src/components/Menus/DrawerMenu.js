@@ -167,7 +167,7 @@ export default DrawerMenu;
 
 const StDrawerMenuCont = styled.div`
   /* font-family: "Noto Sans KR", sans-serif; */
-  font-family: 'Jua', sans-serif;
+  font-family: "Jua", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;

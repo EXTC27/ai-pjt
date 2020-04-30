@@ -2,20 +2,21 @@ import React, { Component } from "react";
 import { Route, withRouter } from "react-router-dom";
 import axios from "axios";
 import update from "react-addons-update";
-import Konva from 'konva'
-import {Image, Rect,} from "react-konva";
+import Konva from "konva";
+import { Image, Rect } from "react-konva";
+import { filtersRef } from "./components/Settings/Filter/FilterRef";
 
-import {Storage, StorageInit, URL} from './components/Storage'
-import MainPage from './components/MainPage'
-import EditorPage from './components/EditorPage'
-import * as Methods from './components/Methods'
-import * as CropRect from './components/Settings/Crop/CropRect'
-import * as BlurRect from './components/Settings/Face/BlurRect'
-import * as AdjustMethods from './components/Settings/Adjust/AdjustMethods'
+import { Storage, StorageInit, URL } from "./components/Storage";
+import MainPage from "./components/MainPage";
+import EditorPage from "./components/EditorPage";
+import * as Methods from "./components/Methods";
+import * as CropRect from "./components/Settings/Crop/CropRect";
+import * as BlurRect from "./components/Settings/Face/BlurRect";
+import * as AdjustMethods from "./components/Settings/Adjust/AdjustMethods";
 
-class App extends Component{
-  constructor(props){
-    super(props)
+class App extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       loading: false,
 
@@ -101,6 +102,10 @@ class App extends Component{
       ],
       changeAdjust: this.changeAdjust,
       changeFilter: this.changeFilter,
+
+      filterRef: filtersRef,
+      prevfilterRef: React.createRef(),
+      prevfilterStage: React.createRef(),
     };
   }
 
@@ -159,12 +164,12 @@ class App extends Component{
   };
 
   modalConfirm = (e) => {
-    const _confirm = e.currentTarget.id
-    
-    if(this.state.curMode === 'origin'){
-      if(_confirm === 'yes'){
+    const _confirm = e.currentTarget.id;
+
+    if (this.state.curMode === "origin") {
+      if (_confirm === "yes") {
         this.setStateAsync({
-          curMode: '',
+          curMode: "",
           imgHistory: [this.state.imgHistory[0]],
           stageHistory: [this.state.stageHistory[0]],
 
@@ -174,8 +179,10 @@ class App extends Component{
             (value, i) => value && false
           ),
 
-          faceCheckList: this.state.faceCheckList.map((value, i) => value && false),
-          
+          faceCheckList: this.state.faceCheckList.map(
+            (value, i) => value && false
+          ),
+
           filterHistory: update(this.state.filterHistory, {
             [this.state.historyIdx]: {
               blur: { $set: 0 },
@@ -185,8 +192,7 @@ class App extends Component{
               luminance: { $set: 0 },
             },
           }),
-        })
-        .then(() => {
+        }).then(() => {
           // const layer = this.state.layerRef.getLayer();
           // const img = layer.find(`#${this.state.historyIdx}`)[0];
           // img.cache();
@@ -196,17 +202,17 @@ class App extends Component{
           // img.saturation(0);
           // img.luminance(0);
           // layer.batchDraw()
-          AdjustMethods.InitDispAdjust(this.state.layerRef.getLayer(), this.state.historyIdx)
-        })
-      }
-      else{
+          AdjustMethods.InitDispAdjust(
+            this.state.layerRef.getLayer(),
+            this.state.historyIdx
+          );
+        });
+      } else {
         this.setState({
           curMode: "",
         });
       }
-    } 
-    
-    else if (this.state.curMode === "backToMain") {
+    } else if (this.state.curMode === "backToMain") {
       if (_confirm === "yes") {
         this.backToMain();
       } else {
@@ -292,19 +298,9 @@ class App extends Component{
   };
 
   changeFilter = async (hue, saturation, luminance, contrast, blur) => {
-    // await this.setStateAsync({
-    //   filterHistory: update(this.state.filterHistory, {
-    //     [this.state.historyIdx]: {
-    //       blur: { $set: 0 },
-    //       hue: { $set: 0 },
-    //       saturation: { $set: 0 },
-    //       luminance: { $set: 0 },
-    //     },
-    //   }),
-    // })
     const layer = this.state.layerRef.getLayer();
     const img = layer.find(`#${this.state.historyIdx}`)[0];
-    console.log(img)
+    console.log(img);
     img.cache();
     img.filters([
       Konva.Filters.Blur,
@@ -413,7 +409,8 @@ class App extends Component{
 
       /* 모드 변경시 작성란 */
 
-      if (_curMode === "crop") { //자르기일 때, 크롭되는 사각형 영역을 생성한다.
+      if (_curMode === "crop") {
+        //자르기일 때, 크롭되는 사각형 영역을 생성한다.
         await this.setStateAsync({ loading: false });
 
         const _width = this.state.stageHistory[this.state.historyIdx].width;
@@ -424,13 +421,13 @@ class App extends Component{
           y: (_height * _ratio) / 4,
           width: (_width * _ratio) / 2,
           height: (_height * _ratio) / 2,
-        }
-        CropRect.createCropRect(this.state.stageRef, _initVal)
-      }
-
-      else if(_curMode === 'segment'){ //원본 사진에서 객체를 뽑아내기 위해 서버쪽에 axios 요청을 보낸다.
-        if(this.state.allSegList.length === 0){ //객체 리스트가 비어있으면 요청을 보낸다.
-          try{
+        };
+        CropRect.createCropRect(this.state.stageRef, _initVal);
+      } else if (_curMode === "segment") {
+        //원본 사진에서 객체를 뽑아내기 위해 서버쪽에 axios 요청을 보낸다.
+        if (this.state.allSegList.length === 0) {
+          //객체 리스트가 비어있으면 요청을 보낸다.
+          try {
             const formData = new FormData();
             formData.append("images", this.state.imgFile);
 
@@ -503,125 +500,160 @@ class App extends Component{
             loading: false,
           });
         }
-      } 
-      
-      else if (_curMode === "face") {
+      } else if (_curMode === "face") {
         if (!this.state.allFaceList.length > 0) {
           //얼굴 리스트가 비어있으면
           try {
             const formData = new FormData();
             formData.append("images", this.state.imgFile);
             axios({
-              method : 'post',
-              url : `${URL}/faces`,
-              data : formData,
-            }).then(function(response){
-              this.setStateAsync({
-                faceCheckList: response.data.response.map(() => true),
-                allFaceList: response.data.response.map((_base64, i) => { 
-                  const _style = Methods.calcFaceView().style
-                  return(
-                  <div key={i} style={_style}>
-                    <img
-                      id={i}
-                      src={`data:image/png;base64,${_base64.base64}`} 
-                      alt='' 
-                      width='100%' 
-                      height='100%'
-                      onClick={this.checkFace}
-                    />
-                  </div>
-                )}),
-                faceList: response.data.response.map((_base64, i) => {
-                    return(
-                    <Image key={i}
-                      id={`face-blur`}
-                      x={_base64.x}
-                      y={_base64.y}
-                      width={_base64.width}
-                      height={_base64.height}
-                      image={Methods.imgUrlToTag(`data:image/png;base64,${_base64.base64}`)}
-                      filters={[Konva.Filters.Blur]}
-                      blurRadius={50}
-                    />
-                  )
-                }),
-                loading: false,
-              })
-              .then(() => {
-                BlurRect.updateBlur(this.state.stageRef.getStage(), this.state.layerRef.getLayer())
-              })
-            }.bind(this))
-          }
-          catch(err){
-            console.log('Axios Error', err) 
+              method: "post",
+              url: `${URL}/faces`,
+              data: formData,
+            }).then(
+              function (response) {
+                this.setStateAsync({
+                  faceCheckList: response.data.response.map(() => true),
+                  allFaceList: response.data.response.map((_base64, i) => {
+                    const _style = Methods.calcFaceView().style;
+                    return (
+                      <div key={i} style={_style}>
+                        <img
+                          id={i}
+                          src={`data:image/png;base64,${_base64.base64}`}
+                          alt=""
+                          width="100%"
+                          height="100%"
+                          onClick={this.checkFace}
+                        />
+                      </div>
+                    );
+                  }),
+                  faceList: response.data.response.map((_base64, i) => {
+                    return (
+                      <Image
+                        key={i}
+                        id={`face-blur`}
+                        x={_base64.x}
+                        y={_base64.y}
+                        width={_base64.width}
+                        height={_base64.height}
+                        image={Methods.imgUrlToTag(
+                          `data:image/png;base64,${_base64.base64}`
+                        )}
+                        filters={[Konva.Filters.Blur]}
+                        blurRadius={50}
+                      />
+                    );
+                  }),
+                  loading: false,
+                }).then(() => {
+                  BlurRect.updateBlur(
+                    this.state.stageRef.getStage(),
+                    this.state.layerRef.getLayer()
+                  );
+                });
+              }.bind(this)
+            );
+          } catch (err) {
+            console.log("Axios Error", err);
             this.setState({
               loading: false,
               // allFaceList : ["얼굴을 인식하지 못했습니다."],
             });
           }
         }
-
-        else if(_curMode === 'tag'){
-          const formData = new FormData();
-          formData.append('images', this.state.imgFile);
-          axios({
-            method : 'post',
-            url : `${URL}/tags`,
-            data : formData,
-          }).then(function(response){
-            this.setState({
-              loading: false,
-              // imgTag : response.data.response
-              tagList : response.data.response
-            })
-          }.bind(this))
-          .catch(function(error){
-            this.setState({
-              loading: false,
-              // imgTag : ["태그를 가져오지 못했습니다. ㅠㅅㅠ"]
-            })
-          }.bind(this))
-        }
-
-        else{
-          this.setStateAsync({
-            loading: false,
-            faceCheckList: this.state.faceCheckList.map(() => true),
-          }).then(
-            BlurRect.updateBlur(
-              this.state.stageRef.getStage(),
-              this.state.layerRef.getLayer()
-            )
+      } else if (_curMode === "tag") {
+        const formData = new FormData();
+        formData.append("images", this.state.imgFile);
+        axios({
+          method: "post",
+          url: `${URL}/tags`,
+          data: formData,
+        })
+          .then(
+            function (response) {
+              this.setState({
+                loading: false,
+                // imgTag : response.data.response
+                tagList: response.data.response,
+              });
+            }.bind(this)
+          )
+          .catch(
+            function (error) {
+              this.setState({
+                loading: false,
+                // imgTag : ["태그를 가져오지 못했습니다. ㅠㅅㅠ"]
+              });
+            }.bind(this)
           );
+      } else if (_curMode === "filter") {
+        const stage = this.state.prevfilterStage.getStage();
+        // console.log(stage);
+        const { filterRef } = this.state;
+        //console.log(filterRef);
+        for (var idx in filterRef) {
+          const prevFilterLayer = stage.find(`#prevfilter${idx}-layer`);
+          //console.log(`#prevfilter${idx}-layer`);
+          //console.log(prevFilterLayer);
+          const prevFilterimg = new Konva.Image({
+            id: `#prevfilter${idx}-img`,
+            image: this.state.img,
+            width: this.state.stageHistory[this.state.historyIdx].width,
+            height: this.state.stageHistory[this.state.historyIdx].height,
+            draggable: true,
+          });
+          prevFilterimg.filters([Konva.Filters.HSL, Konva.Filters.Contrast]);
+          prevFilterimg.hue(filterRef[idx].hue);
+          console.log(filterRef[idx].hue);
+          prevFilterimg.saturation(filterRef[idx].saturation);
+          console.log(filterRef[idx].saturation);
+          prevFilterimg.luminance(filterRef[idx].luminance);
+          console.log(filterRef[idx].luminance);
+          prevFilterimg[`contrast`](filterRef[idx].contrast);
+          console.log(filterRef[idx].contrast);
+          prevFilterLayer.add(prevFilterimg);
+          prevFilterLayer.batchDraw();
+          console.log(prevFilterimg);
         }
+      } else {
+        this.setStateAsync({
+          loading: false,
+          faceCheckList: this.state.faceCheckList.map(() => true),
+        }).then(
+          BlurRect.updateBlur(
+            this.state.stageRef.getStage(),
+            this.state.layerRef.getLayer()
+          )
+        );
       }
+    }
+    // else if(_curMode === 'rotate'){
+    //   const _curHistIdx = this.state.historyIdx
+    //   const _layer = this.state.layerRef.getLayer()
+    //   const _ratio = this.state.stageHistory[_curHistIdx].ratio
+    //   const _dataURL = _layer.toDataURL({ pixelRatio: _ratio })
+    //   const _imgTag = Methods.imgUrlToTag(_dataURL)
 
-      // else if(_curMode === 'rotate'){
-      //   const _curHistIdx = this.state.historyIdx
-      //   const _layer = this.state.layerRef.getLayer()
-      //   const _ratio = this.state.stageHistory[_curHistIdx].ratio
-      //   const _dataURL = _layer.toDataURL({ pixelRatio: _ratio })
-      //   const _imgTag = Methods.imgUrlToTag(_dataURL)
+    //   _imgTag.onload = () => {
+    //     const img = new Konva.Image({
+    //       id: 'rotate',
+    //       image: _imgTag,
+    //     })
+    //     img.rotate(90)
+    //     img.x(_imgTag.height)
+    //     img.y(0)
 
-      //   _imgTag.onload = () => {
-      //     const img = new Konva.Image({
-      //       id: 'rotate',
-      //       image: _imgTag,
-      //     })
-      //     img.rotate(90)
-      //     img.x(_imgTag.height)
-      //     img.y(0)
-
-      //     _layer.add(img)
-      //     _layer.draw()
-      //     this.setState({
-      //       stageHistory: this.state.stageHistory.slice(0, _curHistIdx)
-      //       .concat(Methods.calcStage(_imgTag.height, _imgTag.width))
-      //     })
-      //   }
-      // }
-    } else {
+    //     _layer.add(img)
+    //     _layer.draw()
+    //     this.setState({
+    //       stageHistory: this.state.stageHistory.slice(0, _curHistIdx)
+    //       .concat(Methods.calcStage(_imgTag.height, _imgTag.width))
+    //     })
+    //   }
+    // }
+    else {
       this.setStateAsync({
         curMode: "",
       });
@@ -630,7 +662,8 @@ class App extends Component{
 
   applyChange = async () => {
     const _curHistIdx = this.state.historyIdx;
-    if (_curHistIdx < this.state.imgHistory.length - 1) { //편집 기록을 재설정해준다.
+    if (_curHistIdx < this.state.imgHistory.length - 1) {
+      //편집 기록을 재설정해준다.
       await this.setStateAsync({
         stageHistory: this.state.stageHistory.slice(0, _curHistIdx + 1),
         imgHistory: this.state.imgHistory.slice(0, _curHistIdx + 1),
@@ -663,15 +696,17 @@ class App extends Component{
         faceList: [],
         faceCheckList: [],
 
-        filterHistory: this.state.filterHistory.concat([this.state.filterHistory[this.state.historyIdx]]),
+        filterHistory: this.state.filterHistory.concat([
+          this.state.filterHistory[this.state.historyIdx],
+        ]),
 
         historyIdx: this.state.historyIdx + 1,
         stageHistory: this.state.stageHistory.concat(
           Methods.calcStage(cropInfo.width, cropInfo.height)
         ),
         imgHistory: this.state.imgHistory.concat(
-          <Rect 
-            key={this.state.historyIdx + 1} 
+          <Rect
+            key={this.state.historyIdx + 1}
             id={String(this.state.historyIdx + 1)}
             width={cropInfo.width}
             height={cropInfo.height}
@@ -682,13 +717,11 @@ class App extends Component{
             }}
           />
         ),
-      })
-    }
-
-    else if(this.state.curMode === 'rotate') {
-      console.log("ROTATE")
-      const curStage = this.state.stageHistory[_curHistIdx]
-      const tempStage = this.state.tempStageHistory
+      });
+    } else if (this.state.curMode === "rotate") {
+      console.log("ROTATE");
+      const curStage = this.state.stageHistory[_curHistIdx];
+      const tempStage = this.state.tempStageHistory;
       const newStage = {
         width: curStage.width,
         height: curStage.height,
@@ -715,17 +748,28 @@ class App extends Component{
         historyIdx: this.state.historyIdx + 1,
         rotating: false,
       }).then(() => {
-        console.log(this.state.stageIdx, this.state.historyIdx)
-        console.log("len: ", this.state.stageHistory.length, this.state.stageHistory[this.state.stageIdx])
-        console.log('stageHistory: ', this.state.stageHistory[this.state.historyIdx])
-        console.log('imgHistory: ', this.state.imgHistory.length, this.state.imgHistory[this.state.historyIdx])
-      })
+        console.log(this.state.stageIdx, this.state.historyIdx);
+        console.log(
+          "len: ",
+          this.state.stageHistory.length,
+          this.state.stageHistory[this.state.stageIdx]
+        );
+        console.log(
+          "stageHistory: ",
+          this.state.stageHistory[this.state.historyIdx]
+        );
+        console.log(
+          "imgHistory: ",
+          this.state.imgHistory.length,
+          this.state.imgHistory[this.state.historyIdx]
+        );
+      });
     }
 
-    // else if(this.state.curMode === 'segment'){ 
+    // else if(this.state.curMode === 'segment'){
     // }
 
-    // else if(this.state.curMode === 'face'){ 
+    // else if(this.state.curMode === 'face'){
     // }
 
     // else if(this.state.curMode === 'adjust'){
@@ -734,11 +778,12 @@ class App extends Component{
     this.setState({
       curMode: "",
       rotating: false,
-    })
-  }
+    });
+  };
 
-  refreshChange = () => { //설정 값 새로고침 함수
-    if(this.state.curMode === 'filter' || this.state.curMode === 'adjust'){ 
+  refreshChange = () => {
+    //설정 값 새로고침 함수
+    if (this.state.curMode === "filter" || this.state.curMode === "adjust") {
       this.setStateAsync({
         filterHistory: update(this.state.filterHistory, {
           [this.state.historyIdx]: {
@@ -763,11 +808,12 @@ class App extends Component{
         // img.saturation(0);
         // img.luminance(0);
         // layer.batchDraw()
-        AdjustMethods.InitDispAdjust(this.state.layerRef.getLayer(), this.state.historyIdx)
-      })
-    }
-
-    else if(this.state.curMode === 'segment'){  
+        AdjustMethods.InitDispAdjust(
+          this.state.layerRef.getLayer(),
+          this.state.historyIdx
+        );
+      });
+    } else if (this.state.curMode === "segment") {
       this.setState({
         segCheckList: this.state.segCheckList.map((value) => value && false),
       });

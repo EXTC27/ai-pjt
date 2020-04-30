@@ -1,37 +1,35 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import {Zoom} from '@material-ui/core';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Zoom } from "@material-ui/core";
 
 class SegmentList extends Component {
-
-  render(){
-    const store = this.props.store
-    return(
+  render() {
+    const store = this.props.store;
+    return (
       <Zoom in={true}>
         <StSegListCont>
-        {store.allSegList.length === 0 ?
-          <StMsg>죄송해요. 못 찾겠어요. ㅠㅅㅠ</StMsg>
-          :
-          <StMsg>원본을 유지할 객체를 선택해주세요!</StMsg>
-        }
-        
+          {store.allSegList.length === 0 ? (
+            <StMsg>죄송해요. 못 찾겠어요. ㅠㅅㅠ</StMsg>
+          ) : (
+            <StMsg>원본을 유지할 객체를 선택해주세요!</StMsg>
+          )}
+
           <StSegList>
-          {store.allSegList.map((_img, i) => { return(
-              <StSeg key={i} check={store.segCheckList[i]}>
-                {_img}
-                <StSegLabel>
-                  {store.segLabels[i]}
-                </StSegLabel>
-              </StSeg>
-            )})
-          }
+            {store.allSegList.map((_img, i) => {
+              return (
+                <StSeg key={i} check={store.segCheckList[i]}>
+                  {_img}
+                  <StSegLabel>{store.segLabels[i]}</StSegLabel>
+                </StSeg>
+              );
+            })}
           </StSegList>
         </StSegListCont>
       </Zoom>
-    )
+    );
   }
-} export default SegmentList;
-
+}
+export default SegmentList;
 
 const StSegListCont = styled.div`
   display: flex;
@@ -65,8 +63,8 @@ const StSeg = styled.div`
   align-items: center;
   margin: 0.2rem;
   border: 4px solid;
-  border-color: ${props => props.check ? 'white' : 'gray'};
-  /* border-color: ${props => props.check ? 'rgba(0,0,0,0)' : 'gray'}; */
+  border-color: ${(props) => (props.check ? "white" : "gray")};
+  /* border-color: ${(props) => (props.check ? "rgba(0,0,0,0)" : "gray")}; */
   border-radius: 5px;
   /* background-image: url("MainBackground.jpg"); */
   /* background: linear-gradient(to right, #66ffff 22%, #ff99cc 100%); */
@@ -75,7 +73,7 @@ const StSeg = styled.div`
 `;
 
 const StSegLabel = styled.label`
-  font-family: 'Baloo Bhaina 2', cursive;
+  font-family: "Baloo Bhaina 2", cursive;
   font-size: 90%;
 `;
 

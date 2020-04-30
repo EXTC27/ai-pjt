@@ -1,7 +1,8 @@
 import React from "react";
+import * as Methods from "../../Methods";
+
 import { filtersRef } from "./FilterRef";
 import styled from "styled-components";
-import { Button, Slide } from "@material-ui/core";
 
 class Filter extends React.Component {
   constructor(props) {
@@ -21,47 +22,47 @@ class Filter extends React.Component {
   changeFilter = (e) => {
     const idx = e.currentTarget.id;
     const { filterRef } = this.state;
+    console.log("적용된 필터 :" + filterRef[idx].name);
     this.props.changeFilter(
       filterRef[idx].hue,
       filterRef[idx].saturation,
       filterRef[idx].luminance,
-      filterRef[idx].blur,
-      filterRef[idx].contrast
+      filterRef[idx].contrast,
+      filterRef[idx].blur
     );
-    console.log('idx: ', idx)
-
-    this.setState({
-      channel: idx
-    })
-    
-    var element = document.getElementById(idx)
-    // element.style.color="white";
-    console.log(element)
   };
 
   render() {
     const { filterRef } = this.state;
-    return (
-      <StFilterCont>
-        <StSliderCont>
+    const list = filterRef.map((filter, idx) => {
+      const _img = new window.Image();
+      _img.src = filter.src;
+      const _viewW = _img.width;
+      const _viewH = _img.height;
+      const _style = Methods.calcSegView(_viewW, _viewH).style;
+      const _width = Methods.calcSegView(_viewW, _viewH).width;
+      const _height = Methods.calcSegView(_viewW, _viewH).height;
 
-        <Slide in={true} direction="left" timeout={500}>
-          <StBtnCont>
-            {filterRef.map((filter, idx) => {
-              return (
-                <Button key={idx} id={idx} onClick={this.changeFilter} style={{color: `${this.state.channel == idx ? '#b277e8' : 'white'}`, backgroundColor: `${this.state.channel == idx ? 'white' : 'transparent'}`, fontWeight: 'bold'}}>
-                  {filter.name}
-                </Button>
-              );
-            })}
-          </StBtnCont>
-        </Slide>
+      return (
+        <StImageCont key={idx} style={_style}>
+          <img
+            key={idx}
+            id={idx}
+            src={filter.src}
+            alt={filter.name}
+            width={`${_width}px`}
+            height={`${_height}px`}
+            onClick={this.changeFilter}
+            loading="lazy"
+          />
+        </StImageCont>
+      );
+    });
 
-        </StSliderCont>
-      </StFilterCont>
-    );
+    return <StFilterCont>{list}</StFilterCont>;
   }
-} export default Filter;
+}
+export default Filter;
 
 const StFilterCont = styled.div`
   overflow: scroll;
@@ -71,24 +72,10 @@ const StFilterCont = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-`;
-
-const StSliderCont = styled.div`
-  /* border: 1px solid rgba(0, 0, 0, 0.23); */
-  /* width: 100%;
-  height: 100%; */
-`;
-
-const StBtnCont = styled.div`
-  display: flex;
-  /* overflow: auto; */
+  box-sizing: border-box;
   border: 0.2em solid rgba(0, 0, 0, 0);
-  .MuiButton-root {
-    background-color: gray;
-    margin: 0.2rem;
-  }
-  /* .MuiButton-outlined {
-    border-bottom-color: rgba(0, 0, 0, 0);
-  } */
 `;
 
+const StImageCont = styled.div`
+  margin: 0.2rem;
+`;

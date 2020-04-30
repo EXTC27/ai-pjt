@@ -1,4 +1,6 @@
 import React from "react";
+import * as Methods from "../../Methods";
+
 import { filtersRef } from "./FilterRef";
 import styled from "styled-components";
 import { Button, Slide } from "@material-ui/core";
@@ -33,25 +35,35 @@ class Filter extends React.Component {
 
   render() {
     const { filterRef } = this.state;
-    const list = filterRef.map((filter, idx) => (
-      <>
-        <img
-          key={idx}
-          id={idx}
-          src={filter.src}
-          alt={filter.name}
-          onClick={this.changeFilter}
-        />
-      </>
-    ));
+    const list = filterRef.map((filter, idx) => {
+      const _img = new window.Image();
+      _img.src = filter.src;
+      const _viewW = _img.width;
+      const _viewH = _img.height;
+      const _style = Methods.calcSegView(_viewW, _viewH).style;
+      const _width = Methods.calcSegView(_viewW, _viewH).width;
+      const _height = Methods.calcSegView(_viewW, _viewH).height;
 
-    return (
-      <StFilterCont>
-        <StSliderCont>{list}</StSliderCont>
-      </StFilterCont>
-    );
+      return (
+        <StImageCont key={idx} style={_style}>
+          <img
+            key={idx}
+            id={idx}
+            src={filter.src}
+            alt={filter.name}
+            width={`${_width}px`}
+            height={`${_height}px`}
+            onClick={this.changeFilter}
+            loading="lazy"
+          />
+        </StImageCont>
+      );
+    });
+
+    return <StFilterCont>{list}</StFilterCont>;
   }
-} export default Filter;
+}
+export default Filter;
 
 const StFilterCont = styled.div`
   overflow: scroll;
@@ -61,37 +73,10 @@ const StFilterCont = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-`;
-
-const StSliderCont = styled.div`
-  /* border: 1px solid rgba(0, 0, 0, 0.23); */
-  /* width: 100%;
-  height: 100%; */
-`;
-
-const StBtnCont = styled.div`
-  display: flex;
-  /* overflow: auto; */
+  box-sizing: border-box;
   border: 0.2em solid rgba(0, 0, 0, 0);
-  .MuiButton-root {
-    background-color: gray;
-    margin: 0.2rem;
-  }
-  /* .MuiButton-outlined {
-    border-bottom-color: rgba(0, 0, 0, 0);
-<<<<<<< HEAD
-  } */
-=======
-  }
 `;
 
-const StSliderCont = styled.div`
-  /* border: 1px solid rgba(0, 0, 0, 0); */
-  border: 1px solid rgba(0, 0, 0, 0.23);
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  display: flex;
->>>>>>> b8ae07d700118bbffd6d5a8949d600bd0b9229eb
+const StImageCont = styled.div`
+  margin: 0.2rem;
 `;
-

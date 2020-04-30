@@ -21,34 +21,33 @@ class Filter extends React.Component {
   changeFilter = (e) => {
     const idx = e.currentTarget.id;
     const { filterRef } = this.state;
+    console.log("적용된 필터 :" + filterRef[idx].name);
     this.props.changeFilter(
       filterRef[idx].hue,
       filterRef[idx].saturation,
       filterRef[idx].luminance,
-      filterRef[idx].blur,
-      filterRef[idx].contrast
+      filterRef[idx].contrast,
+      filterRef[idx].blur
     );
   };
 
   render() {
     const { filterRef } = this.state;
+    const list = filterRef.map((filter, idx) => (
+      <>
+        <img
+          key={idx}
+          id={idx}
+          src={filter.src}
+          alt={filter.name}
+          onClick={this.changeFilter}
+        />
+      </>
+    ));
+
     return (
       <StFilterCont>
-        <StSliderCont>
-
-        <Slide in={true} direction="left" timeout={500}>
-          <StBtnCont>
-            {filterRef.map((filter, idx) => {
-              return (
-                <Button key={idx} id={idx} onClick={this.changeFilter}>
-                  {filter.name}
-                </Button>
-              );
-            })}
-          </StBtnCont>
-        </Slide>
-
-        </StSliderCont>
+        <StSliderCont>{list}</StSliderCont>
       </StFilterCont>
     );
   }
@@ -80,6 +79,19 @@ const StBtnCont = styled.div`
   }
   /* .MuiButton-outlined {
     border-bottom-color: rgba(0, 0, 0, 0);
+<<<<<<< HEAD
   } */
+=======
+  }
+`;
+
+const StSliderCont = styled.div`
+  /* border: 1px solid rgba(0, 0, 0, 0); */
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+>>>>>>> b8ae07d700118bbffd6d5a8949d600bd0b9229eb
 `;
 
